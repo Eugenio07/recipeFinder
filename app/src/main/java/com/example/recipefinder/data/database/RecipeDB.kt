@@ -1,6 +1,11 @@
-package com.example.domain
+package com.example.recipefinder.data.database
 
-data class Recipe(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class RecipeDB(
+    @PrimaryKey
     var idMeal: String?,
     var dateModified: String?,
     var strArea: String?,
