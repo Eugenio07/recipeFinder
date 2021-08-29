@@ -1,7 +1,14 @@
 package com.example.recipefinder.data
 
+import com.example.domain.Category
+import com.example.domain.Ingredient
 import com.example.domain.Recipe
+import com.example.domain.RecipeName
 import com.example.recipefinder.data.database.RecipeDB
+import com.example.recipefinder.data.server.theMealDB.CategoryResponse
+import com.example.recipefinder.data.server.theMealDB.GeneralMealResponse
+import com.example.recipefinder.data.server.theMealDB.IngredientsListResponse
+import com.example.recipefinder.data.server.theMealDB.MealsResponse
 
 fun Recipe.toRecipeDB(): RecipeDB =
     RecipeDB(
@@ -116,3 +123,68 @@ fun RecipeDB.toRecipe(): Recipe =
         strTags,
         strYoutube
     )
+
+fun MealsResponse.Meal.toRecipe(): Recipe = Recipe(
+    idMeal,
+    dateModified,
+    strArea,
+    strCategory,
+    strCreativeCommonsConfirmed,
+    strDrinkAlternate,
+    strImageSource,
+    strIngredient1,
+    strIngredient2,
+    strIngredient3,
+    strIngredient4,
+    strIngredient5,
+    strIngredient6,
+    strIngredient7,
+    strIngredient8,
+    strIngredient9,
+    strIngredient10,
+    strIngredient11,
+    strIngredient12,
+    strIngredient13,
+    strIngredient14,
+    strIngredient15,
+    strIngredient16,
+    strIngredient17,
+    strIngredient18,
+    strIngredient19,
+    strIngredient20,
+    strInstructions,
+    strMeal,
+    strMealThumb,
+    strMeasure1,
+    strMeasure2,
+    strMeasure3,
+    strMeasure4,
+    strMeasure5,
+    strMeasure6,
+    strMeasure7,
+    strMeasure8,
+    strMeasure9,
+    strMeasure10,
+    strMeasure11,
+    strMeasure12,
+    strMeasure13,
+    strMeasure14,
+    strMeasure15,
+    strMeasure16,
+    strMeasure17,
+    strMeasure18,
+    strMeasure19,
+    strMeasure20,
+    strSource,
+    strTags,
+    strYoutube
+)
+
+fun CategoryResponse.Category.toDomainCategory(): Category =
+    Category(idCategory, strCategory, strCategoryThumb, strCategoryDescription)
+
+fun IngredientsListResponse.Meal.toDomainIngredient(): Ingredient =
+    Ingredient(idIngredient, strIngredient, strDescription, strType)
+
+fun GeneralMealResponse.Meal.toRecipeName(): RecipeName =
+    RecipeName(strMeal, strMealThumb, idMeal)
