@@ -5,118 +5,119 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
 import com.example.use.Recipe
+import com.orhanobut.logger.Logger
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel (recipe: Recipe): ViewModel() {
     init {
-        Log.i("response1","response")
+        Logger.d("response")
         viewModelScope.launch {
             //Prueba filter by area
             when(val response = recipe.filterByArea("American")){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","Area prueba nombre: ${response.r[0].strMeal}")
-                    Log.i("response1","id: ${response.r[0].idMeal}")
+                    Logger.d("Area prueba nombre: ${response.r[0].strMeal}")
+                    Logger.d("id: ${response.r[0].idMeal}")
                 }
             }
 
             //Prueba filter By Category
             when(val response = recipe.filterByCategory("Seafood")){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","Category prueba nombre: ${response.r[0].strMeal}")
-                    Log.i("response1","id: ${response.r[0].idMeal}")
+                    Logger.d("Category prueba nombre: ${response.r[0].strMeal}")
+                    Logger.d("id: ${response.r[0].idMeal}")
                 }
             }
 
             //Prueba flter by ingredient
             when(val response = recipe.filterByIngredient("chicken_breast")){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","Ingredient prueba nombre: ${response.r[0].strMeal}")
-                    Log.i("response1","id: ${response.r[0].idMeal}")
+                    Logger.d("Ingredient prueba nombre: ${response.r[0].strMeal}")
+                    Logger.d("id: ${response.r[0].idMeal}")
                 }
             }
 
             //Prueba Ingredient
             when(val response = recipe.getListOfIngredients()){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","getListOfIngredients prueba nombre: ${response.r[0].strIngredient}")
-                    Log.i("response1","id: ${response.r[0].idIngredient}")
+                    Logger.d("getListOfIngredients prueba nombre: ${response.r[0].strIngredient}")
+                    Logger.d("id: ${response.r[0].idIngredient}")
                 }
             }
 
             //Prueba getCategories
             when(val response = recipe.getCategories()){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","getCategories prueba nombre: ${response.r[0].strCategory}")
-                    Log.i("response1","id: ${response.r[0].idCategory}")
+                    Logger.d("getCategories prueba nombre: ${response.r[0].strCategory}")
+                    Logger.d("id: ${response.r[0].idCategory}")
                 }
             }
 
             //Prueba getRandomMeal
             when(val response = recipe.getRandomMeal()){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","getRandomMeal prueba nombre: ${response.r[0].strArea}")
-                    Log.i("response1","id: ${response.r[0].strCategory}")
+                    Logger.d("getRandomMeal prueba nombre: ${response.r[0].strArea}")
+                    Logger.d("id: ${response.r[0].strCategory}")
                 }
             }
 
             //Prueba getListOfAreas
             when(val response = recipe.getListOfAreas()){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","getListOfAreas prueba nombre: ${response.r[0]}")
+                    Logger.d("getListOfAreas prueba nombre: ${response.r[0]}")
                 }
             }
 
             //Prueba getByID
             when(val response = recipe.getByID("52772")){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","getByID prueba nombre: ${response.r[0].strArea}")
-                    Log.i("response1","id: ${response.r[0].strIngredient1}")
+                    Logger.d("getByID prueba nombre: ${response.r[0].strArea}")
+                    Logger.d("id: ${response.r[0].strIngredient1}")
                 }
             }
 
             //Prueba getByName
             when(val response = recipe.getByName("Arrabiata")){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","getByName prueba nombre: ${response.r[0].strIngredient1}")
-                    Log.i("response1","id: ${response.r[0].idMeal}")
+                    Logger.d("getByName prueba nombre: ${response.r[0].strIngredient1}")
+                    Logger.d("id: ${response.r[0].idMeal}")
                 }
             }
 
             //Prueba Ingredient
             when(val response = recipe.getByFirstLetter("a")){
                 is Either.Left -> {
-                    Log.i("response1","error en la API: ${response.l}")
+                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Log.i("response1","getListOfIngredients prueba nombre: ${response.r[0].strIngredient1}")
-                    Log.i("response1","id: ${response.r[0].idMeal}")
+                    Logger.d("getListOfIngredients prueba nombre: ${response.r[0].strIngredient1}")
+                    Logger.d("id: ${response.r[0].idMeal}")
                 }
             }
         }

@@ -100,5 +100,7 @@ dependencies {
     //PermissionRequest
     implementation 'com.karumi:dexter:6.2.3'
 
+    //Logger
+    implementation 'com.orhanobut:logger:2.2.0'
 
 }

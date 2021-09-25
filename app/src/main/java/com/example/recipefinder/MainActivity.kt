@@ -10,6 +10,8 @@ import com.example.recipefinder.data.database.RoomDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import com.example.recipefinder.databinding.ActivityMainBinding
 import com.example.use.Recipe
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityViewModel: MainActivityViewModel
@@ -17,6 +19,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Para inicializar el Logger
+        Logger.addLogAdapter(AndroidLogAdapter())
+
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
