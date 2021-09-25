@@ -1,30 +1,27 @@
 package com.example.data.source
 
-import com.example.domain.Category
-import com.example.domain.Ingredient
-import com.example.domain.Recipe
-import com.example.domain.RecipeName
+import com.example.domain.*
 
 interface RemoteDataSource {
 
-    suspend fun getByName(mealName: String): List<Recipe>
+    suspend fun getByName(mealName: String): Either<String, List<Recipe>>
 
-    suspend fun getByFirstLetter(letter: String): List<Recipe>
+    suspend fun getByFirstLetter(letter: String): Either<String, List<Recipe>>
 
-    suspend fun getByID(mealID: String): List<Recipe>
+    suspend fun getByID(mealID: String): Either<String, List<Recipe>>
 
-    suspend fun getRandomMeal(): List<Recipe>
+    suspend fun getRandomMeal(): Either<String, List<Recipe>>
 
-    suspend fun getCategories(): List<Category>
+    suspend fun getCategories(): Either<String, List<Category>>
 
-    suspend fun getListOfAreas(): List<String>
+    suspend fun getListOfAreas(): Either<String, List<String>>
 
-    suspend fun getListOfIngredients(): List<Ingredient>
+    suspend fun getListOfIngredients(): Either<String, List<Ingredient>>
 
-    suspend fun filterByIngredient(ingredient: String): List<RecipeName>
+    suspend fun filterByIngredient(ingredient: String): Either<String, List<RecipeName>>
 
-    suspend fun filterByCategory(category: String): List<RecipeName>
+    suspend fun filterByCategory(category: String): Either<String, List<RecipeName>>
 
-    suspend fun filterByArea(area: String): List<RecipeName>
+    suspend fun filterByArea(area: String): Either<String,List<RecipeName>>
 
 }

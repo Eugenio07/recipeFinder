@@ -1,43 +1,133 @@
 package com.example.recipefinder.data.server.theMealDB
 
 import com.example.data.source.RemoteDataSource
-import com.example.domain.Category
-import com.example.domain.Ingredient
-import com.example.domain.Recipe
-import com.example.domain.RecipeName
+import com.example.domain.*
 import com.example.recipefinder.data.toDomainCategory
 import com.example.recipefinder.data.toDomainIngredient
 import com.example.recipefinder.data.toRecipe
 import com.example.recipefinder.data.toRecipeName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class TheMealDBDataSource: RemoteDataSource {
-    override suspend fun getByName(mealName: String): List<Recipe> =
-        TheMealApi.retrofitService.getByName(mealName).meals.map { it.toRecipe() }
+    override suspend fun getByName(mealName: String): Either<String, List<Recipe>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Either.Right(TheMealApi.retrofitService.getByName(mealName).meals.map { it.toRecipe() })
+            } catch (e: HttpException) {
+                Either.Left("Connection failure")
+            } catch (e: Exception) {
+                Either.Left(e.message ?: "Connection failure")
+            }
+        }
+    }
 
-    override suspend fun getByFirstLetter(letter: String): List<Recipe> =
-        TheMealApi.retrofitService.getByFirstLetter(letter).meals.map { it.toRecipe() }
+    override suspend fun getByFirstLetter(letter: String): Either<String, List<Recipe>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Either.Right(TheMealApi.retrofitService.getByFirstLetter(letter).meals.map { it.toRecipe() })
+            } catch (e: HttpException) {
+                Either.Left("Connection failure")
+            } catch (e: Exception) {
+                Either.Left(e.message ?: "Connection failure")
+            }
+        }
+    }
 
-    override suspend fun getByID(mealID: String): List<Recipe> =
-        TheMealApi.retrofitService.getByID(mealID).meals.map { it.toRecipe() }
+    override suspend fun getByID(mealID: String): Either<String, List<Recipe>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Either.Right(TheMealApi.retrofitService.getByID(mealID).meals.map { it.toRecipe() })
+            } catch (e: HttpException) {
+                Either.Left("Connection failure")
+            } catch (e: Exception) {
+                Either.Left(e.message ?: "Connection failure")
+            }
+        }
+    }
 
-    override suspend fun getRandomMeal(): List<Recipe> =
-        TheMealApi.retrofitService.getRandomMeal().meals.map { it.toRecipe() }
+    override suspend fun getRandomMeal(): Either<String, List<Recipe>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Either.Right(TheMealApi.retrofitService.getRandomMeal().meals.map { it.toRecipe() })
+            } catch (e: HttpException) {
+                Either.Left("Connection failure")
+            } catch (e: Exception) {
+                Either.Left(e.message ?: "Connection failure")
+            }
+        }
+    }
 
-    override suspend fun getCategories(): List<Category> =
-        TheMealApi.retrofitService.getCategories().categories.map { it.toDomainCategory() }
+    override suspend fun getCategories(): Either<String, List<Category>> {
+        return withContext(Dispatchers.IO){
+            try {
+                Either.Right(TheMealApi.retrofitService.getCategories().categories.map { it.toDomainCategory() })
+            }catch (e: HttpException){
+                Either.Left("Connection failure")
+            }catch (e: Exception){
+                Either.Left(e.message?:"Connection failure")
+            }
+        }
+    }
 
-    override suspend fun getListOfAreas(): List<String> =
-        TheMealApi.retrofitService.getListOfAreas().meals.map { it.toString() }
+    override suspend fun getListOfAreas(): Either<String, List<String>> {
+        return withContext(Dispatchers.IO){
+            try {
+                Either.Right(TheMealApi.retrofitService.getListOfAreas().meals.map { it.toString() })
+            }catch (e: HttpException){
+                Either.Left("Connection failure")
+            }catch (e: Exception){
+                Either.Left(e.message?:"Connection failure")
+            }
+        }
+    }
 
-    override suspend fun getListOfIngredients(): List<Ingredient> =
-        TheMealApi.retrofitService.getListOfIngredients().meals.map { it.toDomainIngredient() }
+    override suspend fun getListOfIngredients(): Either<String, List<Ingredient>> {
+        return withContext(Dispatchers.IO){
+            try {
+                Either.Right(TheMealApi.retrofitService.getListOfIngredients().meals.map { it.toDomainIngredient() })
+            }catch (e: HttpException){
+                Either.Left("Connection failure")
+            }catch (e: Exception){
+                Either.Left(e.message?:"Connection failure")
+            }
+        }
+    }
 
-    override suspend fun filterByIngredient(ingredient: String): List<RecipeName> =
-        TheMealApi.retrofitService.filterByIngredient(ingredient).meals.map { it.toRecipeName() }
+    override suspend fun filterByIngredient(ingredient: String): Either<String, List<RecipeName>> {
+        return withContext(Dispatchers.IO){
+            try {
+                Either.Right(TheMealApi.retrofitService.filterByIngredient(ingredient).meals.map { it.toRecipeName() })
+            }catch (e: HttpException){
+                Either.Left("Connection failure")
+            }catch (e: Exception){
+                Either.Left(e.message?:"Connection failure")
+            }
+        }
+    }
 
-    override suspend fun filterByCategory(category: String): List<RecipeName> =
-        TheMealApi.retrofitService.filterByCategory(category).meals.map { it.toRecipeName() }
+    override suspend fun filterByCategory(category: String): Either<String, List<RecipeName>> {
+        return withContext(Dispatchers.IO){
+            try {
+                Either.Right(TheMealApi.retrofitService.filterByCategory(category).meals.map { it.toRecipeName() })
+            }catch (e: HttpException){
+                Either.Left("Connection failure")
+            }catch (e: Exception){
+                Either.Left(e.message?:"Connection failure")
+            }
+        }
+    }
 
-    override suspend fun filterByArea(area: String): List<RecipeName> =
-        TheMealApi.retrofitService.filterByArea(area).meals.map { it.toRecipeName() }
+    override suspend fun filterByArea(area: String): Either<String, List<RecipeName>> {
+        return withContext(Dispatchers.IO){
+            try {
+                Either.Right(TheMealApi.retrofitService.filterByArea(area).meals.map { it.toRecipeName() })
+            }catch (e: HttpException){
+                Either.Left("Connection failure")
+            }catch (e: Exception){
+                Either.Left(e.message?:"Connection failure")
+            }
+        }
+    }
 }
