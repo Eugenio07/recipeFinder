@@ -1,19 +1,18 @@
 package com.example.recipefinder
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
-import com.example.use.Recipe
+import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel (recipe: Recipe): ViewModel() {
+class MainActivityViewModel (recipeUseCases: RecipeUseCases): ViewModel() {
     init {
         Logger.d("response")
         viewModelScope.launch {
             //Prueba filter by area
-            when(val response = recipe.filterByArea("American")){
+            when(val response = recipeUseCases.filterByArea("American")){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -24,7 +23,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba filter By Category
-            when(val response = recipe.filterByCategory("Seafood")){
+            when(val response = recipeUseCases.filterByCategory("Seafood")){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -35,7 +34,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba flter by ingredient
-            when(val response = recipe.filterByIngredient("chicken_breast")){
+            when(val response = recipeUseCases.filterByIngredient("chicken_breast")){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -46,7 +45,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba Ingredient
-            when(val response = recipe.getListOfIngredients()){
+            when(val response = recipeUseCases.getListOfIngredients()){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -57,7 +56,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba getCategories
-            when(val response = recipe.getCategories()){
+            when(val response = recipeUseCases.getCategories()){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -68,7 +67,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba getRandomMeal
-            when(val response = recipe.getRandomMeal()){
+            when(val response = recipeUseCases.getRandomMeal()){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -79,7 +78,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba getListOfAreas
-            when(val response = recipe.getListOfAreas()){
+            when(val response = recipeUseCases.getListOfAreas()){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -89,7 +88,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba getByID
-            when(val response = recipe.getByID("52772")){
+            when(val response = recipeUseCases.getByID("52772")){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -100,7 +99,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba getByName
-            when(val response = recipe.getByName("Arrabiata")){
+            when(val response = recipeUseCases.getByName("Arrabiata")){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }
@@ -111,7 +110,7 @@ class MainActivityViewModel (recipe: Recipe): ViewModel() {
             }
 
             //Prueba Ingredient
-            when(val response = recipe.getByFirstLetter("a")){
+            when(val response = recipeUseCases.getByFirstLetter("a")){
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }

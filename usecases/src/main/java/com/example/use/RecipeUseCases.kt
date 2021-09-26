@@ -7,7 +7,7 @@ import com.example.domain.Ingredient
 import com.example.domain.Recipe
 import com.example.domain.RecipeName
 
-class Recipe(private val recipeRepository: RecipeRepository) {
+class RecipeUseCases(private val recipeRepository: RecipeRepository) {
     suspend fun filterByArea(area: String): Either<String, List<RecipeName>> = recipeRepository.filterByArea(area)
     suspend fun filterByCategory(category: String): Either<String, List<RecipeName>> = recipeRepository.filterByCategory(category)
     suspend fun filterByIngredient(ingredient: String): Either<String, List<RecipeName>> = recipeRepository.filterByIngredient(ingredient)
