@@ -1,20 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.recipefinder.ui.PrincipalViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="16dp"
         tools:context=".ui.PrincipalFragment">
 
-        <TextView
+
+        <EditText
+            android:id="@+id/et_search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="principal" />
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/search_recipe_by_name"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/area_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/secondaryLightColor"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:onClick="@{()->viewModel.filterClicked(viewModel.Filters.COUNTRIES)}"
+            app:layout_constraintEnd_toStartOf="@id/ingredient_option"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_search">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/countries" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ingredient_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/secondaryLightColor"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:onClick="@{()->viewModel.filterClicked(viewModel.Filters.INGREDIENT)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/area_option"
+            app:layout_constraintTop_toBottomOf="@id/et_search">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/ingredient" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/category_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/secondaryLightColor"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:onClick="@{()->viewModel.filterClicked(viewModel.Filters.CATEGORIES)}"
+            app:layout_constraintEnd_toStartOf="@id/random_option"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/area_option">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/category" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/random_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/secondaryLightColor"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:onClick="@{()->viewModel.randomClicked()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/category_option"
+            app:layout_constraintTop_toBottomOf="@id/ingredient_option">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/random_recipe" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/favorite_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/secondaryLightColor"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="@id/category_option"
+            app:layout_constraintTop_toBottomOf="@id/category_option">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/favorites" />
+
+        </LinearLayout>
+
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:text="principal" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/button"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="30dp"-->
+        <!--            android:onClick="@{()->viewModel.filterClicked()}"-->
+        <!--            android:text="to secondary"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/button2"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="30dp"-->
+        <!--            android:onClick="@{()->viewModel.randomClicked()}"-->
+        <!--            android:text="to detail"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/button"-->
+        <!--            tools:layout_editor_absoluteX="0dp" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/button3"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="30dp"-->
+        <!--            android:onClick="@{()->viewModel.recipeNameSearched()}"-->
+        <!--            android:text="to list"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/button2" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

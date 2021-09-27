@@ -19,6 +19,7 @@ class ListFragment : Fragment() {
     ): View {
         mViewModel = getViewModel { ListViewModel() }
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
+        binding.viewModel = mViewModel
         return binding.root
     }
 }

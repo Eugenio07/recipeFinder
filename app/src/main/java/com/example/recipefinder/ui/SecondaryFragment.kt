@@ -19,6 +19,7 @@ class SecondaryFragment : Fragment() {
     ): View {
         mViewModel = getViewModel { SecondaryViewModel() }
         binding = DataBindingUtil.inflate(inflater, R.layout.secondary_fragment, container, false)
+        binding.viewModel = mViewModel
         return binding.root
     }
 }

@@ -19,6 +19,7 @@ class DetailFragment : Fragment() {
     ): View {
         mViewModel = getViewModel { DetailViewModel() }
         binding = DataBindingUtil.inflate(inflater, R.layout.detail_fragment, container, false)
+        binding.viewModel = mViewModel
         return binding.root
     }
 }

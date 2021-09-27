@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_principalFragment_to_secondaryFragment"
             app:destination="@id/secondaryFragment" />
+        <action
+            android:id="@+id/action_principalFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_principalFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/secondaryFragment"
@@ -22,6 +28,9 @@
         <action
             android:id="@+id/action_secondaryFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <argument
+            android:name="filterType"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"
