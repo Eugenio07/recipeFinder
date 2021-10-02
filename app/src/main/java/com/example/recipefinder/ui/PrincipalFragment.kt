@@ -12,6 +12,7 @@ import com.example.recipefinder.R
 import com.example.recipefinder.databinding.PrincipalFragmentBinding
 import com.example.recipefinder.getViewModel
 import com.example.recipefinder.ui.PrincipalViewModel.*
+import com.example.recipefinder.ui.PrincipalViewModel.PrincipalModel.*
 import com.orhanobut.logger.Logger
 
 class PrincipalFragment : Fragment() {
@@ -33,12 +34,12 @@ class PrincipalFragment : Fragment() {
     private fun changedUI(model: PrincipalModel) {
         Logger.d("model: $model")
         when (model) {
-            PrincipalModel.GoToDetail -> this.findNavController()
+            GoToDetail -> this.findNavController()
                 .navigate(PrincipalFragmentDirections.actionPrincipalFragmentToDetailFragment())
-            PrincipalModel.GoToList -> this.findNavController()
-                .navigate(PrincipalFragmentDirections.actionPrincipalFragmentToListFragment())
-            is PrincipalModel.GoToSecondary -> this.findNavController().navigate(
-                PrincipalFragmentDirections.actionPrincipalFragmentToSecondaryFragment(model.filter.name)
+            GoToList -> this.findNavController()
+                .navigate(PrincipalFragmentDirections.actionPrincipalFragmentToDetailFragment())
+            is GoToSecondary -> this.findNavController().navigate(
+                PrincipalFragmentDirections.actionPrincipalFragmentToSecondaryFragment(model.filter)
             )
         }
     }

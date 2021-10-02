@@ -2,10 +2,7 @@ package com.example.recipefinder.data.server.theMealDB
 
 import com.example.data.source.RemoteDataSource
 import com.example.domain.*
-import com.example.recipefinder.data.toDomainCategory
-import com.example.recipefinder.data.toDomainIngredient
-import com.example.recipefinder.data.toRecipe
-import com.example.recipefinder.data.toRecipeName
+import com.example.recipefinder.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -71,10 +68,10 @@ class TheMealDBDataSource: RemoteDataSource {
         }
     }
 
-    override suspend fun getListOfAreas(): Either<String, List<String>> {
+    override suspend fun getListOfAreas(): Either<String, List<Country>> {
         return withContext(Dispatchers.IO){
             try {
-                Either.Right(TheMealApi.retrofitService.getListOfAreas().meals.map { it.toString() })
+                Either.Right(TheMealApi.retrofitService.getListOfAreas().meals.map { it.toDomainArea() })
             }catch (e: HttpException){
                 Either.Left("Connection failure")
             }catch (e: Exception){
@@ -95,10 +92,10 @@ class TheMealDBDataSource: RemoteDataSource {
         }
     }
 
-    override suspend fun filterByIngredient(ingredient: String): Either<String, List<RecipeName>> {
+    override suspend fun filterByIngredient(ingredient: String): Either<String, List<Recipe>> {
         return withContext(Dispatchers.IO){
             try {
-                Either.Right(TheMealApi.retrofitService.filterByIngredient(ingredient).meals.map { it.toRecipeName() })
+                Either.Right(TheMealApi.retrofitService.filterByIngredient(ingredient).meals.map { it.toFilterRecipe() })
             }catch (e: HttpException){
                 Either.Left("Connection failure")
             }catch (e: Exception){
@@ -107,10 +104,10 @@ class TheMealDBDataSource: RemoteDataSource {
         }
     }
 
-    override suspend fun filterByCategory(category: String): Either<String, List<RecipeName>> {
+    override suspend fun filterByCategory(category: String): Either<String, List<Recipe>> {
         return withContext(Dispatchers.IO){
             try {
-                Either.Right(TheMealApi.retrofitService.filterByCategory(category).meals.map { it.toRecipeName() })
+                Either.Right(TheMealApi.retrofitService.filterByCategory(category).meals.map { it.toFilterRecipe() })
             }catch (e: HttpException){
                 Either.Left("Connection failure")
             }catch (e: Exception){
@@ -119,10 +116,10 @@ class TheMealDBDataSource: RemoteDataSource {
         }
     }
 
-    override suspend fun filterByArea(area: String): Either<String, List<RecipeName>> {
+    override suspend fun filterByArea(area: String): Either<String, List<Recipe>> {
         return withContext(Dispatchers.IO){
             try {
-                Either.Right(TheMealApi.retrofitService.filterByArea(area).meals.map { it.toRecipeName() })
+                Either.Right(TheMealApi.retrofitService.filterByArea(area).meals.map { it.toFilterRecipe() })
             }catch (e: HttpException){
                 Either.Left("Connection failure")
             }catch (e: Exception){

@@ -1,18 +1,15 @@
 package com.example.recipefinder.data
 
 import com.example.domain.Category
+import com.example.domain.Country
 import com.example.domain.Ingredient
 import com.example.domain.Recipe
-import com.example.domain.RecipeName
 import com.example.recipefinder.data.database.RecipeDB
-import com.example.recipefinder.data.server.theMealDB.CategoryResponse
-import com.example.recipefinder.data.server.theMealDB.GeneralMealResponse
-import com.example.recipefinder.data.server.theMealDB.IngredientsListResponse
-import com.example.recipefinder.data.server.theMealDB.MealsResponse
+import com.example.recipefinder.data.server.theMealDB.*
 
 fun Recipe.toRecipeDB(): RecipeDB =
     RecipeDB(
-        idMeal,
+        idMeal!!,
         dateModified,
         strArea,
         strCategory,
@@ -180,11 +177,14 @@ fun MealsResponse.Meal.toRecipe(): Recipe = Recipe(
     strYoutube
 )
 
+fun AreasListResponse.Meal.toDomainArea(): Country =
+    Country(strArea)
+
 fun CategoryResponse.Category.toDomainCategory(): Category =
     Category(idCategory, strCategory, strCategoryThumb, strCategoryDescription)
 
 fun IngredientsListResponse.Meal.toDomainIngredient(): Ingredient =
     Ingredient(idIngredient, strIngredient, strDescription, strType)
 
-fun GeneralMealResponse.Meal.toRecipeName(): RecipeName =
-    RecipeName(strMeal, strMealThumb, idMeal)
+fun GeneralMealResponse.Meal.toFilterRecipe(): Recipe =
+    Recipe(strMeal = strMeal, strMealThumb = strMealThumb, idMeal= idMeal)

@@ -30,18 +30,18 @@ class RecipeRepository(
     suspend fun getCategories(): Either<String, List<Category>> =
         remoteDataSource.getCategories()
 
-    suspend fun getListOfAreas(): Either<String, List<String>> =
+    suspend fun getListOfAreas(): Either<String, List<Country>> =
         remoteDataSource.getListOfAreas()
 
     suspend fun getListOfIngredients(): Either<String, List<Ingredient>> =
         remoteDataSource.getListOfIngredients()
 
-    suspend fun filterByIngredient(ingredient: String): Either<String, List<RecipeName>> =
+    suspend fun filterByIngredient(ingredient: String): Either<String, List<Recipe>> =
         remoteDataSource.filterByIngredient(ingredient)
 
-    suspend fun filterByCategory(category: String): Either<String, List<RecipeName>> =
+    suspend fun filterByCategory(category: String): Either<String, List<Recipe>> =
         remoteDataSource.filterByCategory(category)
 
-    suspend fun filterByArea(area: String): Either<String, List<RecipeName>> =
+    suspend fun filterByArea(area: String): Either<String, List<Recipe>> =
         remoteDataSource.filterByArea(area)
 }

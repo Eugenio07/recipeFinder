@@ -10,15 +10,8 @@ class PrincipalViewModel : ViewModel() {
     val model: LiveData<PrincipalModel>
         get() = _model
 
-
-    enum class Filters{
-        COUNTRIES,
-        CATEGORIES,
-        INGREDIENT
-    }
-
     sealed class PrincipalModel {
-        class GoToSecondary(val filter: Filters) : PrincipalModel()
+        class GoToSecondary(val filter: String) : PrincipalModel()
         object GoToList : PrincipalModel()
         object GoToDetail : PrincipalModel()
     }
@@ -32,8 +25,8 @@ class PrincipalViewModel : ViewModel() {
         _model.value = PrincipalModel.GoToDetail
     }
 
-    fun filterClicked(filter: Filters){
-        Logger.i("filter")
+    fun filterClicked(filter: String){
+        Logger.i("filter: $filter")
         _model.value = PrincipalModel.GoToSecondary(filter)
     }
 

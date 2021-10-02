@@ -37,7 +37,7 @@
             android:background="@color/secondaryLightColor"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.filterClicked(viewModel.Filters.COUNTRIES)}"
+            android:onClick="@{()->viewModel.filterClicked(@string/countries)}"
             app:layout_constraintEnd_toStartOf="@id/ingredient_option"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_search">
@@ -65,7 +65,7 @@
             android:background="@color/secondaryLightColor"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.filterClicked(viewModel.Filters.INGREDIENT)}"
+            android:onClick="@{()->viewModel.filterClicked(@string/ingredient)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/area_option"
             app:layout_constraintTop_toBottomOf="@id/et_search">
@@ -93,7 +93,7 @@
             android:background="@color/secondaryLightColor"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.filterClicked(viewModel.Filters.CATEGORIES)}"
+            android:onClick="@{()->viewModel.filterClicked(@string/category)}"
             app:layout_constraintEnd_toStartOf="@id/random_option"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/area_option">

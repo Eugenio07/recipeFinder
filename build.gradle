@@ -4,7 +4,7 @@ buildscript {
         kotlin_version = '1.5.20'
         version_core = '1.6.0'
         version_constraint_layout = "2.0.4"
-        version_kotlin_coroutines = '1.5.1-native-mt'
+        version_kotlin_coroutines = '1.5.2-native-mt'
         version_lifecycle_extensions = "2.2.0"
         version_navigation = "2.3.5"
         version_recyclerview = '1.2.1'
@@ -17,7 +17,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.1"
+        classpath "com.android.tools.build:gradle:7.0.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
 
