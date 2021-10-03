@@ -14,14 +14,14 @@ interface RemoteDataSource {
 
     suspend fun getCategories(): Either<String, List<Category>>
 
-    suspend fun getListOfAreas(): Either<String, List<String>>
+    suspend fun getListOfAreas(): Either<String, List<Country>>
 
     suspend fun getListOfIngredients(): Either<String, List<Ingredient>>
 
-    suspend fun filterByIngredient(ingredient: String): Either<String, List<RecipeName>>
+    suspend fun filterByIngredient(ingredient: String): Either<String, List<Recipe>>
 
-    suspend fun filterByCategory(category: String): Either<String, List<RecipeName>>
+    suspend fun filterByCategory(category: String): Either<String, List<Recipe>>
 
-    suspend fun filterByArea(area: String): Either<String,List<RecipeName>>
+    suspend fun filterByArea(area: String): Either<String,List<Recipe>>
 
 }
