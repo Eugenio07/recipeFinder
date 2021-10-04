@@ -17,7 +17,7 @@ class PrincipalViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
 
     sealed class PrincipalModel {
         class GoToSecondary(val filter: String) : PrincipalModel()
-        object GoToList : PrincipalModel()
+        class GoToList(val listOfRecipes: List<Recipe>) : PrincipalModel()
         class GoToDetail(val recipe: Recipe) : PrincipalModel()
     }
 
@@ -40,13 +40,29 @@ class PrincipalViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
         }
     }
 
-    fun filterClicked(filter: String){
+    fun searchedByName(name: String) {
+        viewModelScope.launch {
+            when (val response = recipeUseCases.getByName(name)) {
+                is Either.Left -> {
+                    Logger.d("error en la API: ${response.l}")
+                }
+                is Either.Right -> {
+                    Logger.d("getByName prueba nombre: ${response.r[0]}")
+                    _model.value = PrincipalModel.GoToList(response.r)
+                }
+            }
+        }
+    }
+
+    fun filterClicked(filter: String) {
         Logger.i("filter: $filter")
         _model.value = PrincipalModel.GoToSecondary(filter)
     }
 
-    fun recipeNameSearched(){
-        Logger.i("name")
-        _model.value = PrincipalModel.GoToList
+    fun favoriteClicked() {
+        viewModelScope.launch {
+            val response = recipeUseCases.getFavoritesRecipes()
+            _model.value = PrincipalModel.GoToList(response)
+        }
     }
 }

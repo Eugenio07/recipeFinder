@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.data.repository.RecipeRepository
 import com.example.recipefinder.R
 import com.example.recipefinder.RecipeApp
+import com.example.recipefinder.RecipeList
 import com.example.recipefinder.data.database.RecipeDataBase
 import com.example.recipefinder.data.database.RoomDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
@@ -44,6 +46,15 @@ class PrincipalFragment : Fragment() {
 
         mViewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
 
+        binding.etSearch.setOnEditorActionListener { textView, i, _ ->
+            Logger.d("text = ${textView.text}")
+            if (i == EditorInfo.IME_ACTION_SEARCH) {
+                Logger.d("entro")
+                mViewModel.searchedByName(textView.text.toString())
+                true
+            }else false
+        }
+
         return binding.root
     }
 
@@ -58,9 +69,13 @@ class PrincipalFragment : Fragment() {
                         )
                     )
             }
-            GoToList -> Logger.i("ir a la lista")
-//            this.findNavController()
-//                .navigate(PrincipalFragmentDirections.actionPrincipalFragmentToListFragment())
+            is GoToList -> {
+                val list = RecipeList()
+                list.addAll(model.listOfRecipes)
+                this.findNavController()
+                    .navigate(PrincipalFragmentDirections.actionPrincipalFragmentToListFragment(list))
+            }
+
             is GoToSecondary -> this.findNavController().navigate(
                 PrincipalFragmentDirections.actionPrincipalFragmentToSecondaryFragment(model.filter)
             )
