@@ -16,4 +16,8 @@ interface RecipeDao {
 
     @Query("SELECT COUNT(idMeal) FROM RecipeDB")
     fun recipeCount(): Int
+
+    @Query("SELECT * FROM RecipeDB WHERE idMeal = :id")
+    fun findById(id: String): RecipeDB?
+
 }
