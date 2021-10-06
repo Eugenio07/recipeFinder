@@ -149,6 +149,7 @@
             android:background="@color/secondaryLightColor"
             android:orientation="vertical"
             android:padding="16dp"
+            android:onClick="@{()->viewModel.favoriteClicked()}"
             app:layout_constraintStart_toStartOf="@id/category_option"
             app:layout_constraintTop_toBottomOf="@id/category_option">
 
