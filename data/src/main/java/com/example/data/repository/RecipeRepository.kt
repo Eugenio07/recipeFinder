@@ -15,6 +15,12 @@ class RecipeRepository(
     suspend fun saveFavoriteRecipe(recipe: Recipe) =
         localDataSource.addToFavorite(recipe)
 
+    suspend fun deleteFavoriteRecipe(recipe: Recipe) =
+        localDataSource.deleteFromFavorite(recipe)
+
+    suspend fun findFavoriteByID(id:String):Recipe? =
+        localDataSource.findByID(id)
+
     suspend fun getRecipeById(id: String): Either<String, List<Recipe>> =
         remoteDataSource.getByID(id)
 

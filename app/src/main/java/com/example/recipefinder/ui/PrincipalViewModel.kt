@@ -3,9 +3,14 @@ package com.example.recipefinder.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.domain.Either
+import com.example.domain.Recipe
+import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
+import kotlinx.coroutines.launch
 
-class PrincipalViewModel : ViewModel() {
+class PrincipalViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel() {
     private val _model = MutableLiveData<PrincipalModel>()
     val model: LiveData<PrincipalModel>
         get() = _model
@@ -13,7 +18,7 @@ class PrincipalViewModel : ViewModel() {
     sealed class PrincipalModel {
         class GoToSecondary(val filter: String) : PrincipalModel()
         object GoToList : PrincipalModel()
-        object GoToDetail : PrincipalModel()
+        class GoToDetail(val recipe: Recipe) : PrincipalModel()
     }
 
     init {
@@ -22,7 +27,17 @@ class PrincipalViewModel : ViewModel() {
 
     fun randomClicked() {
         Logger.i("random")
-        _model.value = PrincipalModel.GoToDetail
+        viewModelScope.launch {
+            when (val response = recipeUseCases.getRandomMeal()) {
+                is Either.Left -> {
+                    Logger.d("error en la API: ${response.l}")
+                }
+                is Either.Right -> {
+                    Logger.d("getRandom prueba nombre: ${response.r[0]}")
+                    _model.value = PrincipalModel.GoToDetail(response.r[0])
+                }
+            }
+        }
     }
 
     fun filterClicked(filter: String){

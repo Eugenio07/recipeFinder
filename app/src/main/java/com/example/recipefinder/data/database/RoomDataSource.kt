@@ -14,6 +14,9 @@ class RoomDataSource(db: RecipeDataBase) : LocalDataSource {
     override suspend fun isEmpty(): Boolean =
         withContext(Dispatchers.IO) { recipeDao.recipeCount() <= 0 }
 
+    override suspend fun findByID(id: String): Recipe? =
+        withContext(Dispatchers.IO) { recipeDao.findById(id)?.let{it.toRecipe()} }
+
     override suspend fun addToFavorite(recipe: Recipe) {
         withContext(Dispatchers.IO) { recipeDao.insertRecipe(recipe.toRecipeDB()) }
     }

@@ -1,7 +1,7 @@
 package com.example.domain
 
 data class Recipe(
-    val idMeal: String?,
+    val idMeal: String?= null,
     val dateModified: String? = null,
     val strArea: String? = null,
     val strCategory: String? = null,

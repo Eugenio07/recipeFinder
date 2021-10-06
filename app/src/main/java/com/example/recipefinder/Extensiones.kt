@@ -1,10 +1,11 @@
 package com.example.recipefinder
 
-import android.app.Activity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 
 inline fun <reified T: ViewModel> Fragment.getViewModel(crossinline factory: () -> T): T {
     val viewModelFactory = object : ViewModelProvider.Factory{
@@ -26,4 +27,8 @@ inline fun <reified T: ViewModel> FragmentActivity.getViewModel(crossinline fact
     }
 
     return ViewModelProvider(this,viewModelFactory)[T::class.java]
+}
+
+fun AppCompatImageView.loadUrl(url: String) {
+    Glide.with(context).load(url).into(this)
 }

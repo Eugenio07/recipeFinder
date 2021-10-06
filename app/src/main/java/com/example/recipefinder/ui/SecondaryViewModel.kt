@@ -96,7 +96,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
 
     fun filterByCategory(category: String) {
         viewModelScope.launch {
-            when (val response = recipeUseCases.filterByIngredient(category)) {
+            when (val response = recipeUseCases.filterByCategory(category)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
                 }

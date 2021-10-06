@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_no_favorite.xml" value="0.1421875" />
         <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/activity_main.xml" value="0.1359375" />
-        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.1921875" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/ingredient_item.xml" value="0.25" />
         <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/list_fragment.xml" value="0.1921875" />
         <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/principal_fragment.xml" value="0.1" />
         <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/secondary_fragment.xml" value="0.1359375" />

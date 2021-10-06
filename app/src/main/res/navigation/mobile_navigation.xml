@@ -47,5 +47,9 @@
         android:id="@+id/detailFragment"
         android:name="com.example.recipefinder.ui.DetailFragment"
         android:label="detail_fragment"
-        tools:layout="@layout/detail_fragment" />
+        tools:layout="@layout/detail_fragment" >
+        <argument
+            android:name="Recipe"
+            app:argType="com.example.recipefinder.RecipeApp" />
+    </fragment>
 </navigation>
