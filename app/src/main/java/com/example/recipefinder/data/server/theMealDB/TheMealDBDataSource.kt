@@ -3,6 +3,7 @@ package com.example.recipefinder.data.server.theMealDB
 import com.example.data.source.RemoteDataSource
 import com.example.domain.*
 import com.example.recipefinder.data.*
+import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -56,10 +57,10 @@ class TheMealDBDataSource: RemoteDataSource {
         }
     }
 
-    override suspend fun getCategories(): Either<String, List<Category>> {
+    override suspend fun getListOfCategories(): Either<String, List<Category>> {
         return withContext(Dispatchers.IO){
             try {
-                Either.Right(TheMealApi.retrofitService.getCategories().categories.map { it.toDomainCategory() })
+                Either.Right(TheMealApi.retrofitService.getListOfCategories().categories.map { it.toDomainCategory() })
             }catch (e: HttpException){
                 Either.Left("Connection failure")
             }catch (e: Exception){

@@ -3,8 +3,8 @@ package com.example.recipefinder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.data.repository.RecipeRepository
-import com.example.recipefinder.data.database.RecipeDataBase
-import com.example.recipefinder.data.database.RoomDataSource
+import com.example.recipefinder.data.database.db.RecipeDataBase
+import com.example.recipefinder.data.database.db.RoomDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import com.example.recipefinder.databinding.ActivityMainBinding
 import com.example.use.RecipeUseCases

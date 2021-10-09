@@ -18,7 +18,7 @@ class RecipeRepository(
     suspend fun deleteFavoriteRecipe(recipe: Recipe) =
         localDataSource.deleteFromFavorite(recipe)
 
-    suspend fun findFavoriteByID(id:String):Recipe? =
+    suspend fun findFavoriteByID(id: String): Recipe? =
         localDataSource.findByID(id)
 
     suspend fun getRecipeById(id: String): Either<String, List<Recipe>> =
@@ -33,14 +33,35 @@ class RecipeRepository(
     suspend fun getByFirstLetter(letter: String): Either<String, List<Recipe>> =
         remoteDataSource.getByFirstLetter(letter)
 
-    suspend fun getCategories(): Either<String, List<Category>> =
-        remoteDataSource.getCategories()
+    suspend fun getListOfCategories(): Either<String, List<Category>> {
+        if (localDataSource.categoryListIsEmpty()) {
+            when (val category = remoteDataSource.getListOfCategories()) {
+                is Either.Left -> return Either.Left(category.l)
+                is Either.Right -> localDataSource.saveCategoryList(category.r)
+            }
+        }
+        return Either.Right(localDataSource.getCategoryList())
+    }
 
-    suspend fun getListOfAreas(): Either<String, List<Country>> =
-        remoteDataSource.getListOfAreas()
+    suspend fun getListOfAreas(): Either<String, List<Country>> {
+        if (localDataSource.countryListIsEmpty()) {
+            when (val countries = remoteDataSource.getListOfAreas()) {
+                is Either.Left -> return Either.Left(countries.l)
+                is Either.Right -> localDataSource.saveCountryList(countries.r)
+            }
+        }
+        return Either.Right(localDataSource.getCountryList())
+    }
 
-    suspend fun getListOfIngredients(): Either<String, List<Ingredient>> =
-        remoteDataSource.getListOfIngredients()
+    suspend fun getListOfIngredients(): Either<String, List<Ingredient>> {
+        if (localDataSource.ingredientListIsEmpty()) {
+            when (val ingredient = remoteDataSource.getListOfIngredients()) {
+                is Either.Left -> return Either.Left(ingredient.l)
+                is Either.Right -> localDataSource.saveIngredientList(ingredient.r)
+            }
+        }
+        return Either.Right(localDataSource.getIngredientList())
+    }
 
     suspend fun filterByIngredient(ingredient: String): Either<String, List<Recipe>> =
         remoteDataSource.filterByIngredient(ingredient)

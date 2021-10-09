@@ -51,7 +51,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                     }
                 }
                 "Category" -> {
-                    when (val response = recipeUseCases.getCategories()) {
+                    when (val response = recipeUseCases.getListOfCategories()) {
                         is Either.Left -> {
                             Logger.d("error en la API: ${response.l}")
                         }

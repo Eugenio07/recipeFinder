@@ -40,7 +40,7 @@ interface TheMealAPIService {
     suspend fun getRandomMeal(): MealsResponse
 
     @GET(MEAL_CATEGORIES)
-    suspend fun getCategories(): CategoryResponse
+    suspend fun getListOfCategories(): CategoryResponse
 
     @GET(LIST_OF_AREAS)
     suspend fun getListOfAreas(): AreasListResponse
