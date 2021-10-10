@@ -9,6 +9,7 @@ import com.example.recipefinder.data.database.entity.CategoryDB
 import com.example.recipefinder.data.database.entity.CountryDB
 import com.example.recipefinder.data.database.entity.IngredientDB
 import com.example.recipefinder.data.database.entity.RecipeDB
+import com.example.recipefinder.data.server.restCountries.RestCountryResponse
 import com.example.recipefinder.data.server.theMealDB.*
 
 fun Recipe.toRecipeDB(): RecipeDB =
@@ -324,4 +325,7 @@ fun Ingredient.toIngredientDB(): IngredientDB =
 
 fun GeneralMealResponse.Meal.toFilterRecipe(): Recipe =
     Recipe(strMeal = strMeal, strMealThumb = strMealThumb, idMeal = idMeal)
+
+fun RestCountryResponse.RestCountryResponseItem.toDomainCountry(): Country =
+    Country(name, demonym, flags?.svg)
 

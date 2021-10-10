@@ -25,4 +25,7 @@ interface LocalDataSource {
     suspend fun getIngredientList(): List<Ingredient>
     suspend fun saveIngredientList(ingredient: List<Ingredient>)
 
+//    suspend fun restCountryListIsEmpty(): Boolean
+//    suspend fun getRestCountryList(): List<Country>
+//    suspend fun saveRestCountryList(countries: List<Country>)
 }

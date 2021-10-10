@@ -51,7 +51,7 @@ class PrincipalFragment : Fragment() {
                 Logger.d("entro")
                 mViewModel.searchedByName(textView.text.toString())
                 true
-            }else false
+            } else false
         }
 
         return binding.root

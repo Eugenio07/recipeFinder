@@ -3,11 +3,26 @@ package com.example.recipefinder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
+import com.example.use.CountryUseCases
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel (recipeUseCases: RecipeUseCases): ViewModel() {
+class MainActivityViewModel(countryUseCases: CountryUseCases) : ViewModel() {
+    init {
+        Logger.d("response")
+        viewModelScope.launch {
+            //Prueba filter by area
+            when (val response = countryUseCases.getAllCountries()) {
+                is Either.Left -> {
+                    Logger.d("error en la API: ${response.l}")
+                }
+                is Either.Right -> {
+                    Logger.d("Area prueba nombre: ${response.r}")
+                }
+            }
+        }
+    }
 
 //    init {
 //        Logger.d("response")
