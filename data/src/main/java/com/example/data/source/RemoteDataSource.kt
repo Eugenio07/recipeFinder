@@ -14,7 +14,7 @@ interface RemoteDataSource {
 
     suspend fun getListOfCategories(): Either<String, List<Category>>
 
-    suspend fun getListOfAreas(): Either<String, List<Country>>
+    suspend fun getListOfAreas(): Either<String, List<String>>
 
     suspend fun getListOfIngredients(): Either<String, List<Ingredient>>
 

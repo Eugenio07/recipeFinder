@@ -8,5 +8,6 @@ data class CountryDB(
     @PrimaryKey
     val name: String,
     val demonym: String?,
-    val flag: String?
+    val flag: String?,
+    val recipeCountry: Boolean = false
 )

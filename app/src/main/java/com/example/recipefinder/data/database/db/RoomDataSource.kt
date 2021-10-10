@@ -6,6 +6,7 @@ import com.example.domain.Country
 import com.example.domain.Ingredient
 import com.example.domain.Recipe
 import com.example.recipefinder.data.*
+import com.example.recipefinder.data.database.dao.CountryDao
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -38,13 +39,25 @@ class RoomDataSource(db: RecipeDataBase) : LocalDataSource {
     override suspend fun countryListIsEmpty(): Boolean =
         withContext(Dispatchers.IO) { countryDao.countryCount() <= 0 }
 
+    override suspend fun recipeCountryListIsEmpty(): Boolean =
+        withContext(Dispatchers.IO) { countryDao.recipeCountryCount() <= 0 }
+
     override suspend fun getCountryList(): List<Country> =
-        withContext(Dispatchers.IO) { countryDao.getCountries().map { it.toDomainArea() } }
+        withContext(Dispatchers.IO) { countryDao.getCountries().map { it.toDomainCountry() } }
 
     override suspend fun saveCountryList(countries: List<Country>) {
         withContext(Dispatchers.IO) { countryDao.insertCountries(countries.map { it.toAreaDB() }) }
     }
 
+    override suspend fun updateCountryList(countries: List<Country>) {
+        withContext(Dispatchers.IO) { countryDao.updateCountries(countries.map { it.toAreaDB() }) }
+    }
+
+    override suspend fun getRecipeCountryList(): List<Country> =
+        withContext(Dispatchers.IO) { countryDao.getRecipeCountries().map { it.toDomainCountry() } }
+
+    override suspend fun getCountryListByDemonym(demonyms: List<String>): List<Country> =
+        withContext(Dispatchers.IO) { countryDao.getCountriesByDemonym(demonyms).map { it.toDomainCountry() } }
 
     override suspend fun categoryListIsEmpty(): Boolean =
         withContext(Dispatchers.IO) { categoryDao.categoryCount() <= 0 }

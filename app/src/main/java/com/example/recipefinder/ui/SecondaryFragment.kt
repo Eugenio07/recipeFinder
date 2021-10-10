@@ -52,7 +52,7 @@ class SecondaryFragment : Fragment() {
         when (model) {
             is AreaList -> {
                 Logger.d("Countries: ${model.countries}")
-                mViewModel.filterByArea(model.countries[0].strArea!!)
+                mViewModel.filterByArea(model.countries[0].demonym!!)
             }
             is CategoryList -> {
                 Logger.d("Categories: ${model.categories}")
@@ -70,6 +70,4 @@ class SecondaryFragment : Fragment() {
             }
         }
     }
-
-
 }

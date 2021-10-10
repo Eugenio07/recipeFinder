@@ -44,13 +44,16 @@ class RecipeRepository(
     }
 
     suspend fun getListOfAreas(): Either<String, List<Country>> {
-        if (localDataSource.countryListIsEmpty()) {
+        if (localDataSource.recipeCountryListIsEmpty()) {
             when (val countries = remoteDataSource.getListOfAreas()) {
                 is Either.Left -> return Either.Left(countries.l)
-                is Either.Right -> localDataSource.saveCountryList(countries.r)
+                is Either.Right -> {val recipeCountries = localDataSource.getCountryListByDemonym(countries.r)
+                    recipeCountries.forEach { it.recipeCountry = true }
+                    localDataSource.updateCountryList(recipeCountries)
+                }
             }
         }
-        return Either.Right(localDataSource.getCountryList())
+        return Either.Right(localDataSource.getRecipeCountryList())
     }
 
     suspend fun getListOfIngredients(): Either<String, List<Ingredient>> {

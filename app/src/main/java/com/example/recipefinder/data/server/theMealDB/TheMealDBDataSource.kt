@@ -69,10 +69,10 @@ class TheMealDBDataSource: RemoteDataSource {
         }
     }
 
-    override suspend fun getListOfAreas(): Either<String, List<Country>> {
+    override suspend fun getListOfAreas(): Either<String, List<String>> {
         return withContext(Dispatchers.IO){
             try {
-                Either.Right(TheMealApi.retrofitService.getListOfAreas().meals.map { it.toDomainArea() })
+                Either.Right(TheMealApi.retrofitService.getListOfAreas().meals.map { it.toCountryString() })
             }catch (e: HttpException){
                 Either.Left("Connection failure")
             }catch (e: Exception){

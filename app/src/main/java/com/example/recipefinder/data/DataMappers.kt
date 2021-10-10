@@ -9,6 +9,7 @@ import com.example.recipefinder.data.database.entity.CategoryDB
 import com.example.recipefinder.data.database.entity.CountryDB
 import com.example.recipefinder.data.database.entity.IngredientDB
 import com.example.recipefinder.data.database.entity.RecipeDB
+import com.example.recipefinder.data.server.restCountries.RestCountryResponse
 import com.example.recipefinder.data.server.theMealDB.*
 
 fun Recipe.toRecipeDB(): RecipeDB =
@@ -295,14 +296,13 @@ fun RecipeApp.toRecipe(): Recipe =
         strYoutube
     )
 
-fun AreasListResponse.Meal.toDomainArea(): Country =
-    Country(strArea, null, null)
+fun AreasListResponse.Meal.toCountryString(): String = strArea!!
 
-fun CountryDB.toDomainArea(): Country =
-    Country(name, demonym, flag)
+fun CountryDB.toDomainCountry(): Country =
+    Country(name, demonym, flag, recipeCountry)
 
 fun Country.toAreaDB(): CountryDB =
-    CountryDB(strArea!!, demonym, flag)
+    CountryDB(strArea!!, demonym, flag, recipeCountry)
 
 fun CategoryResponse.Category.toDomainCategory(): Category =
     Category(idCategory, strCategory, strCategoryThumb, strCategoryDescription)
@@ -325,3 +325,5 @@ fun Ingredient.toIngredientDB(): IngredientDB =
 fun GeneralMealResponse.Meal.toFilterRecipe(): Recipe =
     Recipe(strMeal = strMeal, strMealThumb = strMealThumb, idMeal = idMeal)
 
+fun RestCountryResponse.toDomainCountry(): Country =
+    Country(name, demonym, flags?.svg)
