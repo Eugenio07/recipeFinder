@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.data.repository.RecipeRepository
 import com.example.recipefinder.R
-import com.example.recipefinder.data.database.RecipeDataBase
-import com.example.recipefinder.data.database.RoomDataSource
+import com.example.recipefinder.data.database.db.RecipeDataBase
+import com.example.recipefinder.data.database.db.RoomDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import com.example.recipefinder.databinding.ListFragmentBinding
 import com.example.recipefinder.getViewModel

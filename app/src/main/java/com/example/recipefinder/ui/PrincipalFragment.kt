@@ -11,10 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.data.repository.RecipeRepository
 import com.example.recipefinder.R
-import com.example.recipefinder.RecipeApp
 import com.example.recipefinder.RecipeList
-import com.example.recipefinder.data.database.RecipeDataBase
-import com.example.recipefinder.data.database.RoomDataSource
+import com.example.recipefinder.data.database.db.RecipeDataBase
+import com.example.recipefinder.data.database.db.RoomDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import com.example.recipefinder.data.toRecipeApp
 import com.example.recipefinder.databinding.PrincipalFragmentBinding
