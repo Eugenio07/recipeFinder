@@ -13,8 +13,12 @@ interface LocalDataSource {
     suspend fun getFavorites(): List<Recipe>
 
     suspend fun countryListIsEmpty(): Boolean
+    suspend fun recipeCountryListIsEmpty(): Boolean
     suspend fun getCountryList(): List<Country>
     suspend fun saveCountryList(countries: List<Country>)
+    suspend fun updateCountryList(countries: List<Country>)
+    suspend fun getRecipeCountryList(): List<Country>
+    suspend fun getCountryListByDemonym(demonyms: List<String>): List<Country>
 
     suspend fun categoryListIsEmpty(): Boolean
     suspend fun getCategoryList(): List<Category>

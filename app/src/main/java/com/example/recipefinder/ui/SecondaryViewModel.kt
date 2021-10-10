@@ -33,7 +33,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                             Logger.d("error en la API: ${response.l}")
                         }
                         is Either.Right -> {
-                            Logger.d("getListOfAreas prueba nombre: ${response.r[0]}")
+                            Logger.d("getListOfAreas: ${response.r}")
                             _model.value = SecondaryModel.AreaList(response.r)
                         }
                     }

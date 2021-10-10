@@ -296,14 +296,13 @@ fun RecipeApp.toRecipe(): Recipe =
         strYoutube
     )
 
-fun AreasListResponse.Meal.toDomainArea(): Country =
-    Country(strArea, null, null)
+fun AreasListResponse.Meal.toCountryString(): String = strArea!!
 
-fun CountryDB.toDomainArea(): Country =
-    Country(name, demonym, flag)
+fun CountryDB.toDomainCountry(): Country =
+    Country(name, demonym, flag, recipeCountry)
 
 fun Country.toAreaDB(): CountryDB =
-    CountryDB(strArea!!, demonym, flag)
+    CountryDB(strArea!!, demonym, flag, recipeCountry)
 
 fun CategoryResponse.Category.toDomainCategory(): Category =
     Category(idCategory, strCategory, strCategoryThumb, strCategoryDescription)

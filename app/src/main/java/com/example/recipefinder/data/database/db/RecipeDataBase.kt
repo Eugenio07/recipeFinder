@@ -15,7 +15,7 @@ import com.example.recipefinder.data.database.entity.RecipeDB
 
 @Database(
     entities = [RecipeDB::class, CategoryDB::class, CountryDB::class, IngredientDB::class],
-    version = 2
+    version = 3
 )
 abstract class RecipeDataBase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao

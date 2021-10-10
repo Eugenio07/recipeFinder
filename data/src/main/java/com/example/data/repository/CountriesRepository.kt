@@ -10,6 +10,13 @@ class CountriesRepository(
     private val localDataSource: LocalDataSource,
     private val countriesDataStore: CountriesDataSource
 ) {
-    suspend fun getAllCountries(): Either<String, List<Country>> =
-        countriesDataStore.getAllCountries()
+    suspend fun getAllCountries(): Either<String, List<Country>> {
+        if (localDataSource.countryListIsEmpty()) {
+            when (val countries = countriesDataStore.getAllCountries()) {
+                is Either.Left -> return Either.Left(countries.l)
+                is Either.Right -> localDataSource.saveCountryList(countries.r)
+            }
+        }
+        return Either.Right(localDataSource.getCountryList())
+    }
 }

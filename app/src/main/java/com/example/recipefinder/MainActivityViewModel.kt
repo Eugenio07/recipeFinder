@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 
 class MainActivityViewModel(countryUseCases: CountryUseCases) : ViewModel() {
     init {
-        Logger.d("response")
         viewModelScope.launch {
             //Prueba filter by area
             when (val response = countryUseCases.getAllCountries()) {
@@ -19,7 +18,6 @@ class MainActivityViewModel(countryUseCases: CountryUseCases) : ViewModel() {
                 }
                 is Either.Right -> {
                     Logger.d("Area prueba nombre: ${response.r}")
-                    Logger.d("Area prueba nombre: ${response.r[0].demonym}")
                 }
             }
         }
