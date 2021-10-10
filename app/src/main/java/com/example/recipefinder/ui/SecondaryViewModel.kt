@@ -9,10 +9,10 @@ import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.launch
 
-class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel() {
+class SecondaryViewModel(private val recipeUseCases: RecipeUseCases,filterType: String) : ViewModel() {
 
-    private val _model = MutableLiveData<SecondaryModel>()
-    val model: LiveData<SecondaryModel>
+    private val _model = MutableLiveData<Event<SecondaryModel>>()
+    val model: LiveData<Event<SecondaryModel>>
         get() = _model
 
     sealed class SecondaryModel {
@@ -23,8 +23,12 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
         class FilteredRecipeList(val listOfRecipes: List<Recipe>) : SecondaryModel()
     }
 
+    init {
+        getListOfFilters(filterType)
+    }
 
-    fun getListOfFilters(filterType: String) {
+
+    private fun getListOfFilters(filterType: String) {
         viewModelScope.launch {
             when (filterType) {
                 "Countries" -> {
@@ -34,7 +38,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                         }
                         is Either.Right -> {
                             Logger.d("getListOfAreas prueba nombre: ${response.r[0]}")
-                            _model.value = SecondaryModel.AreaList(response.r)
+                            _model.value = Event(SecondaryModel.AreaList(response.r))
                         }
                     }
                 }
@@ -46,7 +50,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                         is Either.Right -> {
                             Logger.d("getListOfIngredients prueba nombre: ${response.r[0].strIngredient}")
                             Logger.d("id: ${response.r[0].idIngredient}")
-                            _model.value = SecondaryModel.IngredientList(response.r)
+                            _model.value = Event(SecondaryModel.IngredientList(response.r))
                         }
                     }
                 }
@@ -58,7 +62,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                         is Either.Right -> {
                             Logger.d("getCategories prueba nombre: ${response.r[0].strCategory}")
                             Logger.d("id: ${response.r[0].idCategory}")
-                            _model.value = SecondaryModel.CategoryList(response.r)
+                            _model.value = Event(SecondaryModel.CategoryList(response.r))
                         }
                     }
                 }
@@ -74,7 +78,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                 }
                 is Either.Right -> {
                     Logger.d("filterByAreas prueba nombre: ${response.r[0]}")
-                    _model.value = SecondaryModel.FilteredRecipeList(response.r)
+                    _model.value = Event(SecondaryModel.FilteredRecipeList(response.r))
                 }
             }
         }
@@ -88,7 +92,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                 }
                 is Either.Right -> {
                     Logger.d("filterByIngredient prueba nombre: ${response.r[0]}")
-                    _model.value = SecondaryModel.FilteredRecipeList(response.r)
+                    _model.value = Event(SecondaryModel.FilteredRecipeList(response.r))
                 }
             }
         }
@@ -102,7 +106,7 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                 }
                 is Either.Right -> {
                     Logger.d("filterByCategory prueba nombre: ${response.r[0]}")
-                    _model.value = SecondaryModel.FilteredRecipeList(response.r)
+                    _model.value = Event(SecondaryModel.FilteredRecipeList(response.r))
                 }
             }
         }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.data.repository.RecipeRepository
+import com.example.domain.Event
 import com.example.recipefinder.R
 import com.example.recipefinder.RecipeApp
 import com.example.recipefinder.RecipeList
@@ -58,27 +59,29 @@ class PrincipalFragment : Fragment() {
         return binding.root
     }
 
-    private fun changedUI(model: PrincipalModel) {
-        Logger.d("model: $model")
-        when (model) {
-            is GoToDetail -> {
-                this.findNavController()
-                    .navigate(
-                        PrincipalFragmentDirections.actionPrincipalFragmentToDetailFragment(
-                            model.recipe.toRecipeApp()
+    private fun changedUI(event: Event<PrincipalModel>) {
+        event.getContentIfNotHandled()?.let { model ->
+            Logger.d("model: $model")
+            when (model) {
+                is GoToDetail -> {
+                    this.findNavController()
+                        .navigate(
+                            PrincipalFragmentDirections.actionPrincipalFragmentToDetailFragment(
+                                model.recipe.toRecipeApp()
+                            )
                         )
-                    )
-            }
-            is GoToList -> {
-                val list = RecipeList()
-                list.addAll(model.listOfRecipes)
-                this.findNavController()
-                    .navigate(PrincipalFragmentDirections.actionPrincipalFragmentToListFragment(list))
-            }
+                }
+                is GoToList -> {
+                    val list = RecipeList()
+                    list.addAll(model.listOfRecipes)
+                    this.findNavController()
+                        .navigate(PrincipalFragmentDirections.actionPrincipalFragmentToListFragment(list))
+                }
 
-            is GoToSecondary -> this.findNavController().navigate(
-                PrincipalFragmentDirections.actionPrincipalFragmentToSecondaryFragment(model.filter)
-            )
+                is GoToSecondary -> this.findNavController().navigate(
+                    PrincipalFragmentDirections.actionPrincipalFragmentToSecondaryFragment(model.filter)
+                )
+            }
         }
     }
 }
