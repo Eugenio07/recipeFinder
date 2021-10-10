@@ -22,10 +22,6 @@ class PrincipalViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
         class GoToDetail(val recipe: Recipe) : PrincipalModel()
     }
 
-    init {
-        Logger.i("inicioViewModel principal")
-    }
-
     fun randomClicked() {
         Logger.i("random")
         viewModelScope.launch {

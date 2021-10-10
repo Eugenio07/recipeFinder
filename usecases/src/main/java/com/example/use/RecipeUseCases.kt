@@ -7,9 +7,11 @@ class RecipeUseCases(private val recipeRepository: RecipeRepository) {
     suspend fun filterByArea(area: String): Either<String, List<Recipe>> = recipeRepository.filterByArea(area)
     suspend fun filterByCategory(category: String): Either<String, List<Recipe>> = recipeRepository.filterByCategory(category)
     suspend fun filterByIngredient(ingredient: String): Either<String, List<Recipe>> = recipeRepository.filterByIngredient(ingredient)
+
     suspend fun getListOfIngredients(): Either<String, List<Ingredient>> = recipeRepository.getListOfIngredients()
     suspend fun getListOfAreas(): Either<String, List<Country>> = recipeRepository.getListOfAreas()
-    suspend fun getCategories(): Either<String, List<Category>> = recipeRepository.getCategories()
+    suspend fun getListOfCategories(): Either<String, List<Category>> = recipeRepository.getListOfCategories()
+
     suspend fun getRandomMeal(): Either<String, List<Recipe>> = recipeRepository.getRandomMeal()
     suspend fun getByID(id: String):Either<String, List<Recipe>> = recipeRepository.getRecipeById(id)
     suspend fun getByFirstLetter(letter: String):Either<String, List<Recipe>> = recipeRepository.getByFirstLetter(letter)

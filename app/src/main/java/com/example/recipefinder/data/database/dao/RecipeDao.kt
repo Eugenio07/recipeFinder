@@ -1,6 +1,7 @@
-package com.example.recipefinder.data.database
+package com.example.recipefinder.data.database.dao
 
 import androidx.room.*
+import com.example.recipefinder.data.database.entity.RecipeDB
 
 @Dao
 interface RecipeDao {

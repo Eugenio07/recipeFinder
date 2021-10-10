@@ -12,10 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.data.repository.RecipeRepository
 import com.example.domain.Event
 import com.example.recipefinder.R
-import com.example.recipefinder.RecipeApp
 import com.example.recipefinder.RecipeList
-import com.example.recipefinder.data.database.RecipeDataBase
-import com.example.recipefinder.data.database.RoomDataSource
+import com.example.recipefinder.data.database.db.RecipeDataBase
+import com.example.recipefinder.data.database.db.RoomDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import com.example.recipefinder.data.toRecipeApp
 import com.example.recipefinder.databinding.PrincipalFragmentBinding
@@ -53,7 +52,7 @@ class PrincipalFragment : Fragment() {
                 Logger.d("entro")
                 mViewModel.searchedByName(textView.text.toString())
                 true
-            }else false
+            } else false
         }
 
         return binding.root
