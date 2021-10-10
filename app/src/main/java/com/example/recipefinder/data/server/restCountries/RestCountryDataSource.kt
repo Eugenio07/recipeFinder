@@ -13,10 +13,7 @@ class RestCountryDataSource: CountriesDataSource {
     override suspend fun getAllCountries(): Either<String, List<Country>> {
         return withContext(Dispatchers.IO) {
             try {
-                Logger.d("empiezo")
-                val lista = RestCountry.retrofitService.getAllCountries()
-                Logger.d(lista)
-                Either.Right(lista.map { it.toDomainCountry() })
+                Either.Right(RestCountry.retrofitService.getAllCountries().map { it.toDomainCountry() })
             } catch (e: HttpException) {
                 Either.Left("Connection failure")
             } catch (e: Exception) {

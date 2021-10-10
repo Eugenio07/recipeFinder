@@ -326,6 +326,5 @@ fun Ingredient.toIngredientDB(): IngredientDB =
 fun GeneralMealResponse.Meal.toFilterRecipe(): Recipe =
     Recipe(strMeal = strMeal, strMealThumb = strMealThumb, idMeal = idMeal)
 
-fun RestCountryResponse.RestCountryResponseItem.toDomainCountry(): Country =
+fun RestCountryResponse.toDomainCountry(): Country =
     Country(name, demonym, flags?.svg)
-
