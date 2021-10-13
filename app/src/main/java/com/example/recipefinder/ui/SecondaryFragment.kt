@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.data.repository.RecipeRepository
 import com.example.recipefinder.R
 import com.example.recipefinder.data.database.db.RecipeDataBase
@@ -24,30 +25,16 @@ import com.example.recipefinder.data.server.restCountries.RestCountryDataSource
 import com.example.recipefinder.ui.SecondaryViewModel.SecondaryModel
 import com.example.recipefinder.ui.SecondaryViewModel.SecondaryModel.*
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SecondaryFragment : Fragment() {
-    private lateinit var mViewModel: SecondaryViewModel
+    private val mViewModel: SecondaryViewModel by viewModels()
     private lateinit var binding: SecondaryFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val app = Application()
-        mViewModel = getViewModel {
-            SecondaryViewModel(
-                RecipeUseCases(
-                    RecipeRepository(
-                        RoomDataSource(RecipeDataBase.getInstance(requireContext())),
-                        TheMealDBDataSource(),
-                        CountriesRepository(
-                            RoomDataSource(RecipeDataBase.getInstance(requireContext())),
-                            RestCountryDataSource(app),
-                            PermissionChecker(app)
-                        )
-                    )
-                )
-            )
-        }
         binding = DataBindingUtil.inflate(inflater, R.layout.secondary_fragment, container, false)
         binding.viewModel = mViewModel
 

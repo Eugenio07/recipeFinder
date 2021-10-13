@@ -7,9 +7,12 @@ import com.example.domain.Either
 import com.example.use.CountryUseCases
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainActivityViewModel(countryUseCases: CountryUseCases) : ViewModel() {
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(countryUseCases: CountryUseCases) : ViewModel() {
     init {
         viewModelScope.launch {
             //Prueba filter by area

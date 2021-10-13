@@ -7,9 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.*
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel() {
+@HiltViewModel
+class SecondaryViewModel @Inject constructor (private val recipeUseCases: RecipeUseCases) : ViewModel() {
 
     private val _model = MutableLiveData<SecondaryModel>()
     val model: LiveData<SecondaryModel>

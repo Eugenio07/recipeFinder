@@ -3,6 +3,7 @@ package com.example.recipefinder
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.example.data.repository.CountriesRepository
 import com.example.data.repository.RecipeRepository
 import com.example.recipefinder.data.database.db.RecipeDataBase
@@ -14,9 +15,11 @@ import com.example.use.CountryUseCases
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var mainActivityViewModel: MainActivityViewModel
+    private val mainActivityViewModel: MainActivityViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,16 +33,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        mainActivityViewModel = getViewModel {
-            MainActivityViewModel(
-                CountryUseCases(
-                    CountriesRepository(
-                        RoomDataSource(RecipeDataBase.getInstance(this)),
-                        RestCountryDataSource(application),
-                        PermissionChecker(application)
-                    )
-                )
-            )
-        }
+//        mainActivityViewModel = getViewModel {
+//            MainActivityViewModel(
+//                CountryUseCases(
+//                    CountriesRepository(
+//                        RoomDataSource(RecipeDataBase.getInstance(this)),
+//                        RestCountryDataSource(application),
+//                        PermissionChecker(application)
+//                    )
+//                )
+//            )
+//        }
+
+
     }
 }
