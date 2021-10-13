@@ -80,6 +80,20 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
         }
     }
 
+    fun filterByMyArea() {
+        viewModelScope.launch {
+            when (val response = recipeUseCases.filterByMyArea()) {
+                is Either.Left -> {
+                    Logger.d("error en la API: ${response.l}")
+                }
+                is Either.Right -> {
+                    Logger.d("filterByMyArea prueba nombre: ${response.r[0]}")
+                    _model.value = SecondaryModel.FilteredRecipeList(response.r)
+                }
+            }
+        }
+    }
+
     fun filterByIngredient(ingredient: String) {
         viewModelScope.launch {
             when (val response = recipeUseCases.filterByIngredient(ingredient)) {

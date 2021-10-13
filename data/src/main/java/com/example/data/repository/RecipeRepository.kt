@@ -6,7 +6,8 @@ import com.example.domain.*
 
 class RecipeRepository(
     private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val countryRepository: CountriesRepository
 ) {
 
     suspend fun getFavoritesRecipes(): List<Recipe> =
@@ -74,4 +75,7 @@ class RecipeRepository(
 
     suspend fun filterByArea(area: String): Either<String, List<Recipe>> =
         remoteDataSource.filterByArea(area)
+
+    suspend fun filterByMyArea(): Either<String, List<Recipe>> =
+        remoteDataSource.filterByArea(countryRepository.getLocation())
 }

@@ -1,5 +1,6 @@
 package com.example.recipefinder.ui
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
@@ -16,7 +17,10 @@ import com.example.recipefinder.getViewModel
 import com.example.use.RecipeUseCases
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.data.repository.CountriesRepository
+import com.example.recipefinder.PermissionChecker
 import com.example.recipefinder.RecipeList
+import com.example.recipefinder.data.server.restCountries.RestCountryDataSource
 import com.example.recipefinder.ui.SecondaryViewModel.SecondaryModel
 import com.example.recipefinder.ui.SecondaryViewModel.SecondaryModel.*
 import com.orhanobut.logger.Logger
@@ -28,12 +32,18 @@ class SecondaryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val app = Application()
         mViewModel = getViewModel {
             SecondaryViewModel(
                 RecipeUseCases(
                     RecipeRepository(
                         RoomDataSource(RecipeDataBase.getInstance(requireContext())),
-                        TheMealDBDataSource()
+                        TheMealDBDataSource(),
+                        CountriesRepository(
+                            RoomDataSource(RecipeDataBase.getInstance(requireContext())),
+                            RestCountryDataSource(app),
+                            PermissionChecker(app)
+                        )
                     )
                 )
             )

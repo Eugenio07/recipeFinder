@@ -1,5 +1,6 @@
 package com.example.recipefinder
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.data.repository.CountriesRepository
@@ -28,12 +29,14 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+
         mainActivityViewModel = getViewModel {
             MainActivityViewModel(
                 CountryUseCases(
                     CountriesRepository(
                         RoomDataSource(RecipeDataBase.getInstance(this)),
-                        RestCountryDataSource()
+                        RestCountryDataSource(application),
+                        PermissionChecker(application)
                     )
                 )
             )
