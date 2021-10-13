@@ -5,4 +5,5 @@ import com.example.domain.Either
 
 interface CountriesDataSource {
     suspend fun getAllCountries(): Either<String, List<Country>>
+    suspend fun getLocation():String?
 }

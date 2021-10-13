@@ -4,7 +4,7 @@ import com.example.domain.Category
 import com.example.domain.Country
 import com.example.domain.Ingredient
 import com.example.domain.Recipe
-import com.example.recipefinder.RecipeApp
+import com.example.recipefinder.RecipeParcelable
 import com.example.recipefinder.data.database.entity.CategoryDB
 import com.example.recipefinder.data.database.entity.CountryDB
 import com.example.recipefinder.data.database.entity.IngredientDB
@@ -182,8 +182,8 @@ fun MealsResponse.Meal.toRecipe(): Recipe = Recipe(
     strYoutube
 )
 
-fun Recipe.toRecipeApp(): RecipeApp =
-    RecipeApp(
+fun Recipe.toRecipeApp(): RecipeParcelable =
+    RecipeParcelable(
         idMeal,
         dateModified,
         strArea,
@@ -239,7 +239,7 @@ fun Recipe.toRecipeApp(): RecipeApp =
         strYoutube
     )
 
-fun RecipeApp.toRecipe(): Recipe =
+fun RecipeParcelable.toRecipe(): Recipe =
     Recipe(
         idMeal,
         dateModified,

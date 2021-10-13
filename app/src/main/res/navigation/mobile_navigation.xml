@@ -50,6 +50,6 @@
         tools:layout="@layout/detail_fragment" >
         <argument
             android:name="Recipe"
-            app:argType="com.example.recipefinder.RecipeApp" />
+            app:argType="com.example.recipefinder.RecipeParcelable" />
     </fragment>
 </navigation>

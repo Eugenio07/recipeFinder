@@ -1,5 +1,6 @@
 package com.example.recipefinder.ui
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
@@ -8,11 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.example.data.repository.CountriesRepository
 import com.example.data.repository.RecipeRepository
 import com.example.domain.Recipe
+import com.example.recipefinder.PermissionChecker
 import com.example.recipefinder.R
 import com.example.recipefinder.data.database.db.RecipeDataBase
 import com.example.recipefinder.data.database.db.RoomDataSource
+import com.example.recipefinder.data.server.restCountries.RestCountryDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import com.example.recipefinder.data.toRecipe
 import com.example.recipefinder.databinding.DetailFragmentBinding
@@ -34,12 +38,19 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         recipe = DetailFragmentArgs.fromBundle(requireArguments()).recipe.toRecipe()
+        val app = Application()
+
         mViewModel = getViewModel {
             DetailViewModel(
                 RecipeUseCases(
                     RecipeRepository(
                         RoomDataSource(RecipeDataBase.getInstance(requireContext())),
-                        TheMealDBDataSource()
+                        TheMealDBDataSource(),
+                        CountriesRepository(
+                            RoomDataSource(RecipeDataBase.getInstance(requireContext())),
+                            RestCountryDataSource(app),
+                            PermissionChecker(app)
+                        )
                     )
                 ), recipe
             )

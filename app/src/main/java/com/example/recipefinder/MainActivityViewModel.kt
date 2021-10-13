@@ -1,5 +1,6 @@
 package com.example.recipefinder
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
@@ -20,6 +21,8 @@ class MainActivityViewModel(countryUseCases: CountryUseCases) : ViewModel() {
                     Logger.d("Area prueba nombre: ${response.r}")
                 }
             }
+            val location = countryUseCases.getLocation()
+            Log.d("PRETTY_LOGGER", "location: $location")
         }
     }
 
