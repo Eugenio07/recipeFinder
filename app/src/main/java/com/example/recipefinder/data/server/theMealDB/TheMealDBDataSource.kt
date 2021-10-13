@@ -3,7 +3,6 @@ package com.example.recipefinder.data.server.theMealDB
 import com.example.data.source.RemoteDataSource
 import com.example.domain.*
 import com.example.recipefinder.data.*
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

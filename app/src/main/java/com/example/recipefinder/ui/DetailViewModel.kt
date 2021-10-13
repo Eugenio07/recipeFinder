@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.Recipe
 import com.example.recipefinder.RecipeParcelable
 import com.example.recipefinder.data.toRecipe
 import com.example.use.RecipeUseCases
