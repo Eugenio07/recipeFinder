@@ -31,20 +31,5 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-
-//        mainActivityViewModel = getViewModel {
-//            MainActivityViewModel(
-//                CountryUseCases(
-//                    CountriesRepository(
-//                        RoomDataSource(RecipeDataBase.getInstance(this)),
-//                        RestCountryDataSource(application),
-//                        PermissionChecker(application)
-//                    )
-//                )
-//            )
-//        }
-
-
     }
 }
