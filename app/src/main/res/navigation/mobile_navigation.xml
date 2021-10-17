@@ -49,7 +49,7 @@
         android:label="detail_fragment"
         tools:layout="@layout/detail_fragment" >
         <argument
-            android:name="Recipe"
+            android:name="RecipeParcelable"
             app:argType="com.example.recipefinder.RecipeParcelable" />
     </fragment>
 </navigation>

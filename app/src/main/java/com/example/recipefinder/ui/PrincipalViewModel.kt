@@ -8,9 +8,12 @@ import com.example.domain.Either
 import com.example.domain.Recipe
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PrincipalViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel() {
+@HiltViewModel
+class PrincipalViewModel  @Inject constructor(private val recipeUseCases: RecipeUseCases) : ViewModel() {
     private val _model = MutableLiveData<PrincipalModel>()
     val model: LiveData<PrincipalModel>
         get() = _model
