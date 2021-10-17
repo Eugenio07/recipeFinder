@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 class RecipeList : ArrayList<Recipe>(), Parcelable
 
 @Parcelize
-class RecipeApp(
+class RecipeParcelable(
     val idMeal: String? = null,
     val dateModified: String? = null,
     val strArea: String? = null,

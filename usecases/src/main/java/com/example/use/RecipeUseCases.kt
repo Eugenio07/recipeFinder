@@ -5,6 +5,7 @@ import com.example.domain.*
 
 class RecipeUseCases(private val recipeRepository: RecipeRepository) {
     suspend fun filterByArea(area: String): Either<String, List<Recipe>> = recipeRepository.filterByArea(area)
+    suspend fun filterByMyArea(): Either<String, List<Recipe>> = recipeRepository.filterByMyArea()
     suspend fun filterByCategory(category: String): Either<String, List<Recipe>> = recipeRepository.filterByCategory(category)
     suspend fun filterByIngredient(ingredient: String): Either<String, List<Recipe>> = recipeRepository.filterByIngredient(ingredient)
 

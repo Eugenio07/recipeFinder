@@ -1,5 +1,6 @@
 package com.example.recipefinder.ui
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.data.repository.RecipeRepository
+import androidx.fragment.app.viewModels
 import com.example.recipefinder.R
 import com.example.recipefinder.data.database.db.RecipeDataBase
 import com.example.recipefinder.data.database.db.RoomDataSource
@@ -20,22 +22,16 @@ import androidx.lifecycle.Observer
 import com.example.domain.Event
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
-    private lateinit var mViewModel: ListViewModel
+    private val mViewModel: ListViewModel by viewModels()
     private lateinit var binding: ListFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mViewModel = getViewModel { ListViewModel(
-            RecipeUseCases(
-                RecipeRepository(
-                    RoomDataSource(RecipeDataBase.getInstance(requireContext())),
-                    TheMealDBDataSource()
-                )
-            )
-        ) }
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         binding.viewModel = mViewModel
 

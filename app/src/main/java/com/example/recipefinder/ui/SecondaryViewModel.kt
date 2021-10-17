@@ -9,9 +9,12 @@ import com.example.domain.*
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel() {
+@HiltViewModel
+class SecondaryViewModel @Inject constructor (private val recipeUseCases: RecipeUseCases) : ViewModel() {
 
     private val _model = MutableLiveData<Event<SecondaryModel>>()
     val model: LiveData<Event<SecondaryModel>>
@@ -98,6 +101,20 @@ class SecondaryViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel
                 is Either.Right -> {
                     Logger.d("filterByAreas prueba nombre: ${response.r[0]}")
                     _model.value = Event(SecondaryModel.FilteredRecipeList(response.r))
+                }
+            }
+        }
+    }
+
+    fun filterByMyArea() {
+        viewModelScope.launch {
+            when (val response = recipeUseCases.filterByMyArea()) {
+                is Either.Left -> {
+                    Logger.d("error en la API: ${response.l}")
+                }
+                is Either.Right -> {
+                    Logger.d("filterByMyArea prueba nombre: ${response.r[0]}")
+                    _model.value = SecondaryModel.FilteredRecipeList(response.r)
                 }
             }
         }

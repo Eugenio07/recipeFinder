@@ -4,11 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.Recipe
+import com.example.recipefinder.RecipeParcelable
+import com.example.recipefinder.data.toRecipe
 import com.example.use.RecipeUseCases
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Named
 
-class DetailViewModel(private val recipeUseCases: RecipeUseCases, private val recipe: Recipe) : ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(private val recipeUseCases: RecipeUseCases,
+                                          @Named("RecipeParcelable") recipeParcelable: RecipeParcelable) : ViewModel() {
 
     private var _isFav = MutableLiveData<Boolean>()
     val isFav: LiveData<Boolean>
@@ -16,6 +22,8 @@ class DetailViewModel(private val recipeUseCases: RecipeUseCases, private val re
 
     data class IngredientItem(val name: String?, val measure: String?)
     val ingredientsList = mutableListOf<IngredientItem>()
+
+    val recipe = recipeParcelable.toRecipe()
 
     init {
         _isFav.value = false

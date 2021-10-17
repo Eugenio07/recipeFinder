@@ -1,13 +1,12 @@
 package com.example.recipefinder.data.database.db
 
+import android.util.Log
 import com.example.data.source.LocalDataSource
 import com.example.domain.Category
 import com.example.domain.Country
 import com.example.domain.Ingredient
 import com.example.domain.Recipe
 import com.example.recipefinder.data.*
-import com.example.recipefinder.data.database.dao.CountryDao
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -58,6 +57,12 @@ class RoomDataSource(db: RecipeDataBase) : LocalDataSource {
 
     override suspend fun getCountryListByDemonym(demonyms: List<String>): List<Country> =
         withContext(Dispatchers.IO) { countryDao.getCountriesByDemonym(demonyms).map { it.toDomainCountry() } }
+
+    override suspend fun isInRecipeList(country: String): Boolean =
+        withContext(Dispatchers.IO) {
+            Log.d("PRETTY_LOGGER", "isInRecipeList: $country")
+            countryDao.isInRecipeList("country")?.recipeCountry?: false}
+
 
     override suspend fun categoryListIsEmpty(): Boolean =
         withContext(Dispatchers.IO) { categoryDao.categoryCount() <= 0 }
