@@ -326,4 +326,4 @@ fun GeneralMealResponse.Meal.toFilterRecipe(): Recipe =
     Recipe(strMeal = strMeal, strMealThumb = strMealThumb, idMeal = idMeal)
 
 fun RestCountryResponse.toDomainCountry(): Country =
-    Country(name, demonym, flags?.svg)
+    Country(name, demonym, flags?.png)

@@ -4,8 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/activity_main.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/category_item.xml" value="0.2128623188405797" />
+        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/country_item.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/ingredient_item.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/ingredient_item_list.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/list_fragment.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/principal_fragment.xml" value="0.2115036231884058" />
+        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/recipe_item.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/secondary_fragment.xml" value="0.2006340579710145" />
       </map>
     </option>

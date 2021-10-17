@@ -64,3 +64,6 @@ object TheMealApi {
         getRetrofit(ROOT_URL_THE_MEAL).create(TheMealAPIService::class.java)
     }
 }
+
+
+enum class NETWORK_STATUS  {DONE,LOADING,ERROR}
