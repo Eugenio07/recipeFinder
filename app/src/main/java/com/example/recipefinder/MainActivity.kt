@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         //Para inicializar el Logger
         Logger.addLogAdapter(AndroidLogAdapter())
+        mainActivityViewModel
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
