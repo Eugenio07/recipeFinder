@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="country"
+            type="com.example.domain.Country"/>
+
+        <variable
+            name="clickListener"
+            type="com.example.recipefinder.ui.CountryListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:onClick="@{() -> clickListener.onClick(country)}">
+
+        <ImageView
+            android:id="@+id/country_image"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            />
+
+        <TextView
+            android:id="@+id/country_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="prueba"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</layout>
