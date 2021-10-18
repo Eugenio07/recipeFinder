@@ -20,7 +20,6 @@ class RecipeUseCases(private val recipeRepository: RecipeRepository) {
 
     suspend fun deleteFavoriteRecipe(recipe: Recipe) = recipeRepository.deleteFavoriteRecipe(recipe)
     suspend fun saveFavoriteRecipe(recipe: Recipe) = recipeRepository.saveFavoriteRecipe(recipe)
-    suspend fun getFavoritesRecipes() = recipeRepository.getFavoritesRecipes()
+    suspend fun getFavoritesRecipes(): List<Recipe> = recipeRepository.getFavoritesRecipes()
     suspend fun findRecipeByID(id:String) : Recipe?= recipeRepository.findFavoriteByID(id)
-
 }

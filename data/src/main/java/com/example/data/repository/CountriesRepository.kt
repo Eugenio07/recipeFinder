@@ -23,13 +23,12 @@ class CountriesRepository(
 
     suspend fun getLocation(): String {
         return if (permissionChecker.request(arrayListOf(COARSE_LOCATION, FINE_LOCATION)).first) {
-
-            if (localDataSource.isInRecipeList(countriesDataSource.getLocation() ?: "Unknown")) {
-                "country"
+            val country = countriesDataSource.getLocation() ?: "Unknown"
+            if (localDataSource.isInRecipeList(country)) {
+                country
             } else {
                 "Unknown"
             }
-
         } else {
             "Unknown"
         }
