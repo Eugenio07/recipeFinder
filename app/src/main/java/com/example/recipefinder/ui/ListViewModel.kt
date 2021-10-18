@@ -10,9 +10,12 @@ import com.example.domain.Recipe
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ListViewModel(private val recipeUseCases: RecipeUseCases) : ViewModel() {
+@HiltViewModel
+class ListViewModel @Inject constructor (private val recipeUseCases: RecipeUseCases) : ViewModel() {
     private val _model = MutableLiveData<Event<ListModel>>()
     val model: LiveData<Event<ListModel>>
         get() = _model
