@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.data.repository.RecipeRepository
@@ -23,24 +24,16 @@ import com.example.recipefinder.ui.PrincipalViewModel.*
 import com.example.recipefinder.ui.PrincipalViewModel.PrincipalModel.*
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PrincipalFragment : Fragment() {
-    private lateinit var mViewModel: PrincipalViewModel
+    private val mViewModel: PrincipalViewModel by viewModels()
     private lateinit var binding: PrincipalFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mViewModel = getViewModel {
-            PrincipalViewModel(
-                RecipeUseCases(
-                    RecipeRepository(
-                        RoomDataSource(RecipeDataBase.getInstance(requireContext())),
-                        TheMealDBDataSource()
-                    )
-                )
-            )
-        }
         binding = DataBindingUtil.inflate(inflater, R.layout.principal_fragment, container, false)
         binding.viewModel = mViewModel
 
