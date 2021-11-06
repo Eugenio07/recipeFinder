@@ -1,4 +1,4 @@
-package mokedDomain
+package mockedDomain
 
 import com.example.domain.Category
 

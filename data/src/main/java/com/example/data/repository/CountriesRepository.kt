@@ -22,16 +22,15 @@ class CountriesRepository(
     }
 
     suspend fun getLocation(): String {
-        return if (permissionChecker.request(arrayListOf(COARSE_LOCATION, FINE_LOCATION)).first) {
-            val country = countriesDataSource.getLocation() ?: "Unknown"
-            if (localDataSource.isInRecipeList(country)) {
-                country
-            } else {
-                "Unknown"
+        var response = "Unknown"
+        if (permissionChecker.request(arrayListOf(COARSE_LOCATION, FINE_LOCATION)).first) {
+            countriesDataSource.getLocation()?.let { country ->
+                if (localDataSource.isInRecipeList(country)) {
+                    response = country
+                }
             }
-        } else {
-            "Unknown"
         }
+        return response
     }
 }
 

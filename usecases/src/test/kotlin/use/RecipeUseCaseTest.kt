@@ -6,10 +6,10 @@ import com.example.use.RecipeUseCases
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
-import mokedDomain.mockedCategory
-import mokedDomain.mockedCountry
-import mokedDomain.mockedIngredient
-import mokedDomain.mockedRecipe
+import mockedDomain.mockedCategory
+import mockedDomain.mockedCountry
+import mockedDomain.mockedIngredient
+import mockedDomain.mockedRecipe
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test

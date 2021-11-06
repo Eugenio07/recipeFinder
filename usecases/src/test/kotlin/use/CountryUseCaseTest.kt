@@ -5,8 +5,7 @@ import com.example.domain.Either
 import com.example.use.CountryUseCases
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
-import mokedDomain.mockedCountry
-import org.junit.Assert
+import mockedDomain.mockedCountry
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -37,5 +36,26 @@ class CountryUseCaseTest {
         }
     }
 
+    @Test
+    fun `get location permission denied`(){
+        runBlocking {
+            whenever(countriesRepository.getLocation()).thenReturn("Unknown")
 
+            val result = countryUseCases.getLocation()
+
+            assertEquals("Unknown", result)
+        }
+    }
+
+    @Test
+    fun `get location permission granted`(){
+        runBlocking {
+            val country = mockedCountry.strArea
+            whenever(countriesRepository.getLocation()).thenReturn(country)
+
+            val result = countryUseCases.getLocation()
+
+            assertEquals(country, result)
+        }
+    }
 }

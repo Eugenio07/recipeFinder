@@ -15,6 +15,7 @@ class MainActivityViewModel @Inject constructor(countryUseCases: CountryUseCases
     init {
         viewModelScope.launch {
             //Prueba filter by area
+
             when (val response = countryUseCases.getAllCountries()) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
