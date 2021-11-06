@@ -6,12 +6,9 @@ import com.example.data.source.LocalDataSource
 import com.example.data.source.RemoteDataSource
 import com.example.domain.Either
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyBlocking
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import mockedDomain.mockedCategory
-import mockedDomain.mockedCountry
 import mockedDomain.mockedIngredient
 import mockedDomain.mockedRecipe
 import org.junit.Assert

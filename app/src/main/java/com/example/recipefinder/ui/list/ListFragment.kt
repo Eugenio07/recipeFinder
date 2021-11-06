@@ -1,4 +1,4 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.list
 
 
 import android.view.LayoutInflater
@@ -8,16 +8,10 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.data.repository.RecipeRepository
 import androidx.fragment.app.viewModels
 import com.example.recipefinder.R
-import com.example.recipefinder.data.database.db.RecipeDataBase
-import com.example.recipefinder.data.database.db.RoomDataSource
-import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import com.example.recipefinder.data.toRecipeApp
 import com.example.recipefinder.databinding.ListFragmentBinding
-import com.example.recipefinder.getViewModel
-import com.example.use.RecipeUseCases
 import androidx.lifecycle.Observer
 import com.example.domain.Event
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS

@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.recipefinder.ui.SecondaryViewModel" />
+            type="com.example.recipefinder.ui.secondary.SecondaryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.SecondaryFragment">
+        tools:context=".ui.secondary.SecondaryFragment">
 
         <TextView
             android:id="@+id/textView"

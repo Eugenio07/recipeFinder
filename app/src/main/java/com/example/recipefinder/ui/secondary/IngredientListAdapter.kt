@@ -1,14 +1,11 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.secondary
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.domain.Ingredient
-import com.example.domain.Recipe
 import com.example.recipefinder.collapse
 import com.example.recipefinder.databinding.IngredientItemListBinding
 import com.example.recipefinder.expand

@@ -1,11 +1,10 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.Recipe
-import com.example.recipefinder.R
 import com.example.recipefinder.databinding.RecipeItemBinding
 
 class RecipeAdapter(private val recipeList: List<Recipe>, private val clickListener: RecipeListener) :

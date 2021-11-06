@@ -9,7 +9,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.recipefinder.ui.RecipeListener" />
+            type="com.example.recipefinder.ui.list.RecipeListener" />
     </data>
 
     <LinearLayout

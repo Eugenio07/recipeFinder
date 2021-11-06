@@ -1,17 +1,14 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.secondary
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.Category
-import com.example.domain.Ingredient
-import com.example.recipefinder.R
 import com.example.recipefinder.collapse
 import com.example.recipefinder.databinding.CategoryItemBinding
-import com.example.recipefinder.databinding.IngredientItemListBinding
 import com.example.recipefinder.expand
 import com.example.recipefinder.toggleArrow
 import java.util.ArrayList
@@ -47,10 +44,10 @@ class CategoriesAdapter(categoryList: List<Category>, private val clickListener:
                 }
                 if(!item.expanded){
                     toggleArrow(false,btExpand)
-                    lytExpand.visibility = View.GONE
+                    lytExpand.visibility = GONE
                 }else{
                     toggleArrow(true,btExpand)
-                    lytExpand.visibility = View.VISIBLE
+                    lytExpand.visibility = VISIBLE
                 }
 
                 category = item

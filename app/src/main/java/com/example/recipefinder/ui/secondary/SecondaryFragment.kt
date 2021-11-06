@@ -1,9 +1,8 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.secondary
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -15,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.domain.Event
 import com.example.recipefinder.RecipeList
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
-import com.example.recipefinder.ui.SecondaryViewModel.SecondaryModel
-import com.example.recipefinder.ui.SecondaryViewModel.SecondaryModel.*
+import com.example.recipefinder.ui.secondary.SecondaryViewModel.SecondaryModel
+import com.example.recipefinder.ui.secondary.SecondaryViewModel.SecondaryModel.*
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +37,10 @@ class SecondaryFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        mViewModel.getListOfFilters(SecondaryFragmentArgs.fromBundle(requireArguments()).filterType)
+        mViewModel.getListOfFilters(
+            SecondaryFragmentArgs.fromBundle(
+                requireArguments()
+            ).filterType)
     }
 
     private fun changedUI(event: Event<SecondaryModel>) {
@@ -62,7 +64,8 @@ class SecondaryFragment : Fragment() {
                 }
                 is IngredientList -> {
                     binding.textView.text = "Ingredients"
-                    binding.rvSecondary.adapter = IngredientListAdapter(model.ingredients,IngredientListener {
+                    binding.rvSecondary.adapter = IngredientListAdapter(model.ingredients,
+                        IngredientListener {
                         it.strIngredient?.let { it1 -> mViewModel.filterByIngredient(it1) }
                     })
                 }
@@ -70,7 +73,11 @@ class SecondaryFragment : Fragment() {
                     val list = RecipeList()
                     list.addAll(model.listOfRecipes)
                     this.findNavController()
-                        .navigate(SecondaryFragmentDirections.actionSecondaryFragmentToListFragment(list))
+                        .navigate(
+                            SecondaryFragmentDirections.actionSecondaryFragmentToListFragment(
+                                list
+                            )
+                        )
                 }
                 is Network -> {
                     when(model.networkStatus){

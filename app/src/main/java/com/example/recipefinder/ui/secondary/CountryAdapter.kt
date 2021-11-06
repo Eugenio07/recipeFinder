@@ -1,12 +1,10 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.secondary
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.Country
-import com.example.recipefinder.R
 import com.example.recipefinder.databinding.CountryItemBinding
 
 class CountryAdapter(private val countryList: List<Country>, private val clickListener: CountryListener) :

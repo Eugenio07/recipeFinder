@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.recipefinder.ui.PrincipalViewModel" />
+            type="com.example.recipefinder.ui.principal.PrincipalViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:context=".ui.PrincipalFragment">
+        tools:context=".ui.principal.PrincipalFragment">
 
 
         <EditText

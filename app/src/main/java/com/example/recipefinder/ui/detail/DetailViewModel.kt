@@ -1,4 +1,4 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

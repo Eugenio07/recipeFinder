@@ -119,5 +119,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     testImplementation "org.mockito:mockito-inline:2.28.2"
+
+    implementation "androidx.arch.core:core-testing:2.1.0"
     
 }
