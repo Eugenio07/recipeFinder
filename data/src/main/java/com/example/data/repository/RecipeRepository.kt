@@ -48,7 +48,9 @@ class RecipeRepository(
         if (localDataSource.recipeCountryListIsEmpty()) {
             when (val countries = remoteDataSource.getListOfAreas()) {
                 is Either.Left -> return Either.Left(countries.l)
-                is Either.Right -> {val recipeCountries = localDataSource.getCountryListByDemonym(countries.r)
+
+                is Either.Right -> {
+                    val recipeCountries = localDataSource.getCountryListByDemonym(countries.r)
                     recipeCountries.forEach { it.recipeCountry = true }
                     localDataSource.updateCountryList(recipeCountries)
                 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
+import com.example.domain.Event
 import com.example.domain.Recipe
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
@@ -13,9 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PrincipalViewModel  @Inject constructor(private val recipeUseCases: RecipeUseCases) : ViewModel() {
-    private val _model = MutableLiveData<PrincipalModel>()
-    val model: LiveData<PrincipalModel>
+class PrincipalViewModel @Inject constructor (private val recipeUseCases: RecipeUseCases) : ViewModel() {
+    private val _model = MutableLiveData<Event<PrincipalModel>>()
+    val model: LiveData<Event<PrincipalModel>>
         get() = _model
 
     sealed class PrincipalModel {
@@ -33,7 +34,7 @@ class PrincipalViewModel  @Inject constructor(private val recipeUseCases: Recipe
                 }
                 is Either.Right -> {
                     Logger.d("getRandom prueba nombre: ${response.r[0]}")
-                    _model.value = PrincipalModel.GoToDetail(response.r[0])
+                    _model.value = Event(PrincipalModel.GoToDetail(response.r[0]))
                 }
             }
         }
@@ -47,7 +48,7 @@ class PrincipalViewModel  @Inject constructor(private val recipeUseCases: Recipe
                 }
                 is Either.Right -> {
                     Logger.d("getByName prueba nombre: ${response.r[0]}")
-                    _model.value = PrincipalModel.GoToList(response.r)
+                    _model.value = Event(PrincipalModel.GoToList(response.r))
                 }
             }
         }
@@ -55,13 +56,13 @@ class PrincipalViewModel  @Inject constructor(private val recipeUseCases: Recipe
 
     fun filterClicked(filter: String) {
         Logger.i("filter: $filter")
-        _model.value = PrincipalModel.GoToSecondary(filter)
+        _model.value = Event(PrincipalModel.GoToSecondary(filter))
     }
 
     fun favoriteClicked() {
         viewModelScope.launch {
             val response = recipeUseCases.getFavoritesRecipes()
-            _model.value = PrincipalModel.GoToList(response)
+            _model.value = Event(PrincipalModel.GoToList(response))
         }
     }
 }
