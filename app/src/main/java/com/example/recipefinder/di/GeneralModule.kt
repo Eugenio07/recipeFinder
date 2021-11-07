@@ -10,6 +10,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Named
 
 @Module
@@ -24,4 +26,7 @@ class GeneralModule {
     @Provides
     @Named("RecipeParcelable")
     fun recipeParcelableProvider(args: SavedStateHandle): RecipeParcelable = args.get<RecipeParcelable>("RecipeParcelable")?: throw IllegalStateException("Recipe null")
-}
+
+    @Provides
+    fun dispatcherProvider(): CoroutineDispatcher = Dispatchers.Main
+ }

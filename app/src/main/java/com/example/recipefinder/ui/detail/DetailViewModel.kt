@@ -5,22 +5,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipefinder.RecipeParcelable
+import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.toRecipe
 import com.example.use.RecipeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val recipeUseCases: RecipeUseCases,
-                                          @Named("RecipeParcelable") recipeParcelable: RecipeParcelable) : ViewModel() {
+class DetailViewModel @Inject constructor(
+    private val recipeUseCases: RecipeUseCases,
+    @Named("RecipeParcelable") recipeParcelable: RecipeParcelable,
+    uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
 
     private var _isFav = MutableLiveData<Boolean>()
     val isFav: LiveData<Boolean>
         get() = _isFav
 
     data class IngredientItem(val name: String?, val measure: String?)
+
     val ingredientsList = mutableListOf<IngredientItem>()
 
     val recipe = recipeParcelable.toRecipe()
@@ -33,7 +39,6 @@ class DetailViewModel @Inject constructor(private val recipeUseCases: RecipeUseC
             }
         }
     }
-
 
 
     fun favClicked() {

@@ -7,14 +7,19 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
 import com.example.domain.Event
 import com.example.domain.Recipe
+import com.example.recipefinder.ScopedViewModel
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PrincipalViewModel @Inject constructor (private val recipeUseCases: RecipeUseCases) : ViewModel() {
+class PrincipalViewModel @Inject constructor(
+    private val recipeUseCases: RecipeUseCases,
+    uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
     private val _model = MutableLiveData<Event<PrincipalModel>>()
     val model: LiveData<Event<PrincipalModel>>
         get() = _model
