@@ -25,6 +25,10 @@ class SecondaryViewModel @Inject constructor(
     val model: LiveData<Event<SecondaryModel>>
         get() = _model
 
+    init {
+        initScope()
+    }
+
     sealed class SecondaryModel {
         class AreaList(val countries: List<Country>) : SecondaryModel()
         class CategoryList(val categories: List<Category>) : SecondaryModel()
@@ -40,7 +44,7 @@ class SecondaryViewModel @Inject constructor(
         val handler = Handler()
         handler.postDelayed(
             {
-                viewModelScope.launch {
+                launch {
                     when (filterType) {
                         "Countries" -> {
                             when (val response = recipeUseCases.getListOfAreas()) {
@@ -98,7 +102,7 @@ class SecondaryViewModel @Inject constructor(
 
     fun filterByArea(country: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.filterByArea(country)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
@@ -113,7 +117,7 @@ class SecondaryViewModel @Inject constructor(
 
     fun filterByIngredient(ingredient: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.filterByIngredient(ingredient)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
@@ -128,7 +132,7 @@ class SecondaryViewModel @Inject constructor(
 
     fun filterByCategory(category: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.filterByCategory(category)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")

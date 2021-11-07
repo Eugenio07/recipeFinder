@@ -25,6 +25,10 @@ class ListViewModel @Inject constructor(
     val model: LiveData<Event<ListModel>>
         get() = _model
 
+    init {
+        initScope()
+    }
+
     sealed class ListModel {
         class GoToDetail(val recipe: Recipe) : ListModel()
         class Network(val networkStatus: NETWORK_STATUS) : ListModel()
@@ -33,7 +37,7 @@ class ListViewModel @Inject constructor(
     fun recipeClicked(recipe: Recipe) {
         Logger.i("click")
         _model.value = Event(ListModel.Network(NETWORK_STATUS.LOADING))
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.getByID(recipe.idMeal!!)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")

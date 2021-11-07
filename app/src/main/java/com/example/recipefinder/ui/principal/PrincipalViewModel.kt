@@ -24,6 +24,10 @@ class PrincipalViewModel @Inject constructor(
     val model: LiveData<Event<PrincipalModel>>
         get() = _model
 
+    init {
+        initScope()
+    }
+
     sealed class PrincipalModel {
         class GoToSecondary(val filter: String) : PrincipalModel()
         class GoToList(val listOfRecipes: List<Recipe>) : PrincipalModel()
@@ -32,7 +36,7 @@ class PrincipalViewModel @Inject constructor(
 
     fun randomClicked() {
         Logger.i("random")
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.getRandomMeal()) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
@@ -46,7 +50,7 @@ class PrincipalViewModel @Inject constructor(
     }
 
     fun searchedByName(name: String) {
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.getByName(name)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
@@ -65,7 +69,7 @@ class PrincipalViewModel @Inject constructor(
     }
 
     fun favoriteClicked() {
-        viewModelScope.launch {
+        launch {
             val response = recipeUseCases.getFavoritesRecipes()
             _model.value = Event(PrincipalModel.GoToList(response))
         }

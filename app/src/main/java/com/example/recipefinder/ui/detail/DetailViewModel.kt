@@ -32,8 +32,9 @@ class DetailViewModel @Inject constructor(
     val recipe = recipeParcelable.toRecipe()
 
     init {
+        initScope()
         _isFav.value = false
-        viewModelScope.launch {
+        launch {
             recipeUseCases.findRecipeByID(recipe.idMeal!!)?.let {
                 _isFav.value = true
             }
@@ -42,7 +43,7 @@ class DetailViewModel @Inject constructor(
 
 
     fun favClicked() {
-        viewModelScope.launch {
+        launch {
             _isFav.value = !_isFav.value!!
             if (_isFav.value == true) {
                 recipeUseCases.saveFavoriteRecipe(recipe)
