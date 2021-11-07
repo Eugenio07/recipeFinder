@@ -20,18 +20,30 @@ class PrincipalViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases,
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
-    private val _model = MutableLiveData<Event<PrincipalModel>>()
-    val model: LiveData<Event<PrincipalModel>>
+    private val _model = MutableLiveData<PrincipalModel>()
+    val model: LiveData<PrincipalModel>
         get() = _model
+
+    private val _model2 = MutableLiveData<SealedTest>()
+    val model2: LiveData<SealedTest>
+        get() = _model2
 
     init {
         initScope()
     }
 
     sealed class PrincipalModel {
-        class GoToSecondary(val filter: String) : PrincipalModel()
-        class GoToList(val listOfRecipes: List<Recipe>) : PrincipalModel()
-        class GoToDetail(val recipe: Recipe) : PrincipalModel()
+        data class GoToSecondary(val filter: String) : PrincipalModel()
+        data class GoToList(val listOfRecipes: List<Recipe>) : PrincipalModel()
+        data class GoToDetail(val recipe: Recipe) : PrincipalModel()
+    }
+
+    sealed class SealedTest{
+        data class TestClass(val testInt: Int): SealedTest()
+    }
+
+    fun test(){
+        _model2.value = SealedTest.TestClass(1)
     }
 
     fun randomClicked() {
@@ -43,7 +55,7 @@ class PrincipalViewModel @Inject constructor(
                 }
                 is Either.Right -> {
                     Logger.d("getRandom prueba nombre: ${response.r[0]}")
-                    _model.value = Event(PrincipalModel.GoToDetail(response.r[0]))
+                    _model.value = PrincipalModel.GoToDetail(response.r[0])
                 }
             }
         }
@@ -57,7 +69,7 @@ class PrincipalViewModel @Inject constructor(
                 }
                 is Either.Right -> {
                     Logger.d("getByName prueba nombre: ${response.r[0]}")
-                    _model.value = Event(PrincipalModel.GoToList(response.r))
+                    _model.value = PrincipalModel.GoToList(response.r)
                 }
             }
         }
@@ -65,13 +77,12 @@ class PrincipalViewModel @Inject constructor(
 
     fun filterClicked(filter: String) {
         Logger.i("filter: $filter")
-        _model.value = Event(PrincipalModel.GoToSecondary(filter))
+        _model.value = PrincipalModel.GoToSecondary(filter)
     }
 
     fun favoriteClicked() {
         launch {
-            val response = recipeUseCases.getFavoritesRecipes()
-            _model.value = Event(PrincipalModel.GoToList(response))
+            _model.value = PrincipalModel.GoToList(recipeUseCases.getFavoritesRecipes())
         }
     }
 }

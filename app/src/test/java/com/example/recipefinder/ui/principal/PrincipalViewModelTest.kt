@@ -27,13 +27,26 @@ class PrincipalViewModelTest {
     lateinit var recipeUseCases: RecipeUseCases
 
     @Mock
-    lateinit var observer: Observer<Event<PrincipalModel>>
+    lateinit var observer: Observer<PrincipalModel>
+
+    @Mock
+    lateinit var observer2: Observer<SealedTest>
 
     private lateinit var vm: PrincipalViewModel
 
     @Before
     fun setUp() {
         vm = PrincipalViewModel(recipeUseCases, Dispatchers.Unconfined)
+    }
+
+    @Test
+    fun `filter clicked`() {
+        vm.model.observeForever(observer)
+
+        vm.filterClicked("area")
+
+        verify(observer).onChanged(PrincipalModel.GoToSecondary("area"))
+
     }
 
     @Test
@@ -45,7 +58,20 @@ class PrincipalViewModelTest {
 
             vm.favoriteClicked()
 
-            verify(observer).onChanged(Event(PrincipalModel.GoToList(recipes)))
+            verify(observer).onChanged(PrincipalModel.GoToList(recipes))
+        }
+    }
+
+    @Test
+    fun `test`() {
+        runBlocking {
+
+
+            vm.model2.observeForever(observer2)
+
+            vm.test()
+
+            verify(observer2).onChanged(SealedTest.TestClass(1))
         }
     }
 
