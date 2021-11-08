@@ -7,9 +7,11 @@ import com.example.recipefinder.ui.principal.PrincipalViewModel.*
 import com.example.use.RecipeUseCases
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import mockedDomain.mockedRecipe
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -27,10 +29,8 @@ class PrincipalViewModelTest {
     lateinit var recipeUseCases: RecipeUseCases
 
     @Mock
-    lateinit var observer: Observer<PrincipalModel>
+    lateinit var observer: Observer<Event<PrincipalModel>>
 
-    @Mock
-    lateinit var observer2: Observer<SealedTest>
 
     private lateinit var vm: PrincipalViewModel
 
@@ -45,7 +45,7 @@ class PrincipalViewModelTest {
 
         vm.filterClicked("area")
 
-        verify(observer).onChanged(PrincipalModel.GoToSecondary("area"))
+        verify(observer).onChanged(Event(PrincipalModel.GoToSecondary("area")))
 
     }
 
@@ -58,21 +58,8 @@ class PrincipalViewModelTest {
 
             vm.favoriteClicked()
 
-            verify(observer).onChanged(PrincipalModel.GoToList(recipes))
+            verify(observer).onChanged(Event(PrincipalModel.GoToList(recipes)))
+
         }
     }
-
-    @Test
-    fun `test`() {
-        runBlocking {
-
-
-            vm.model2.observeForever(observer2)
-
-            vm.test()
-
-            verify(observer2).onChanged(SealedTest.TestClass(1))
-        }
-    }
-
 }

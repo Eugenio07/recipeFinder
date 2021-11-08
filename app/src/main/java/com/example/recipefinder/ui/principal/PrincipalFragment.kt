@@ -45,8 +45,8 @@ class PrincipalFragment : Fragment() {
         return binding.root
     }
 
-    private fun changedUI(model: PrincipalModel) {
-
+    private fun changedUI(event: Event<PrincipalModel>) {
+        event.getContentIfNotHandled()?.let { model ->
             Logger.d("model: $model")
             when (model) {
                 is GoToDetail -> {
@@ -74,6 +74,6 @@ class PrincipalFragment : Fragment() {
                     )
                 )
             }
-
+        }
     }
 }

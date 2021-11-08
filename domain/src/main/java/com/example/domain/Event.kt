@@ -1,6 +1,6 @@
 package com.example.domain
 
-open class Event<out T>(private val content: T) {
+data class Event<out T>(private val content: T) {
 
     var hasBeenHandled = false
         private set // Allow external read but not write

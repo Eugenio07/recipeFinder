@@ -11,10 +11,13 @@
         <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/list_fragment.xml" value="0.1921875" />
         <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/principal_fragment.xml" value="0.1" />
         <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/secondary_fragment.xml" value="0.1359375" />
+        <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/app/src/main/res/layout/category_item.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/app/src/main/res/layout/country_item.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/recipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.15677083333333333" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
