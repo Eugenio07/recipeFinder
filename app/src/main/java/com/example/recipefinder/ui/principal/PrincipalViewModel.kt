@@ -20,11 +20,10 @@ class PrincipalViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases,
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
+
     private val _model = MutableLiveData<Event<PrincipalModel>>()
     val model: LiveData<Event<PrincipalModel>>
         get() = _model
-
-
 
     init {
         initScope()

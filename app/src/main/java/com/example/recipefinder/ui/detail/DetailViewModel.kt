@@ -34,8 +34,11 @@ class DetailViewModel @Inject constructor(
     init {
         initScope()
         _isFav.value = false
+    }
+
+    fun findRecipe(id: String){
         launch {
-            recipeUseCases.findRecipeByID(recipe.idMeal!!)?.let {
+            recipeUseCases.findRecipeByID(id).let {
                 _isFav.value = true
             }
         }
@@ -45,7 +48,7 @@ class DetailViewModel @Inject constructor(
     fun favClicked() {
         launch {
             _isFav.value = !_isFav.value!!
-            if (_isFav.value == true) {
+            if (_isFav.value!!) {
                 recipeUseCases.saveFavoriteRecipe(recipe)
             } else {
                 recipeUseCases.deleteFavoriteRecipe(recipe)

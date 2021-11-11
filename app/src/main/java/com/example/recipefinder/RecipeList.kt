@@ -9,7 +9,7 @@ class RecipeList : ArrayList<Recipe>(), Parcelable
 
 @Parcelize
 class RecipeParcelable(
-    val idMeal: String? = null,
+    val idMeal: String? = "1",
     val dateModified: String? = null,
     val strArea: String? = null,
     val strCategory: String? = null,

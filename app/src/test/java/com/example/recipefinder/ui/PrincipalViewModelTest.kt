@@ -1,17 +1,16 @@
-package com.example.recipefinder.ui.principal
+package com.example.recipefinder.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.domain.Event
+import com.example.recipefinder.ui.principal.PrincipalViewModel
 import com.example.recipefinder.ui.principal.PrincipalViewModel.*
 import com.example.use.RecipeUseCases
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import mockedDomain.mockedRecipe
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

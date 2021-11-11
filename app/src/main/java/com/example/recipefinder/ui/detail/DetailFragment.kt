@@ -9,6 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.recipefinder.R
 import com.example.recipefinder.databinding.DetailFragmentBinding
 import com.example.recipefinder.loadUrl
@@ -30,18 +31,20 @@ class DetailFragment : Fragment() {
         updateUI()
         mViewModel.fillIngredientsList()
         binding.rvIngredients.adapter = IngredientAdapter(mViewModel.ingredientsList)
-
-        mViewModel.isFav.observe(viewLifecycleOwner, {
-            val iconFav = if (it) R.drawable.ic_favorite else R.drawable.ic_no_favorite
-            binding.btnFavorite.setImageDrawable(
-                AppCompatResources.getDrawable(
-                    requireContext(),
-                    iconFav
-                )
-            )
-        })
-
+        changeFavIcon(false)
+        mViewModel.isFav.observe(viewLifecycleOwner, Observer(::changeFavIcon))
+        mViewModel.findRecipe(mViewModel.recipe.idMeal!!)
         return binding.root
+    }
+
+    private fun changeFavIcon(isFav: Boolean){
+        val iconFav = if (isFav) R.drawable.ic_favorite else R.drawable.ic_no_favorite
+        binding.btnFavorite.setImageDrawable(
+            AppCompatResources.getDrawable(
+                requireContext(),
+                iconFav
+            )
+        )
     }
 
     private fun updateUI() {
