@@ -59,9 +59,7 @@ class RoomDataSource(db: RecipeDataBase) : LocalDataSource {
         withContext(Dispatchers.IO) { countryDao.getCountriesByDemonym(demonyms).map { it.toDomainCountry() } }
 
     override suspend fun isInRecipeList(country: String): Boolean =
-        withContext(Dispatchers.IO) {
-            Log.d("PRETTY_LOGGER", "isInRecipeList: $country")
-            countryDao.isInRecipeList("country")?.recipeCountry?: false}
+        withContext(Dispatchers.IO) { countryDao.isInRecipeList(country)?.recipeCountry?: false}
 
 
     override suspend fun categoryListIsEmpty(): Boolean =

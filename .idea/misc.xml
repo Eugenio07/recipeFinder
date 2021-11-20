@@ -3,16 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/activity_main.xml" value="0.2318840579710145" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/category_item.xml" value="0.2128623188405797" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/country_item.xml" value="0.1947463768115942" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.1947463768115942" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/ingredient_item.xml" value="0.1947463768115942" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/ingredient_item_list.xml" value="0.21784420289855072" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/list_fragment.xml" value="0.2006340579710145" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/principal_fragment.xml" value="0.2115036231884058" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/recipe_item.xml" value="0.21784420289855072" />
-        <entry key="..\:/Users/Luque/OneDrive/Documentos/Proyecto Coders/recipeFinder/app/src/main/res/layout/secondary_fragment.xml" value="0.2006340579710145" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_no_favorite.xml" value="0.1421875" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/activity_main.xml" value="0.1359375" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/country_item.xml" value="0.10572916666666667" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/ingredient_item.xml" value="0.25" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/list_fragment.xml" value="0.1921875" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/principal_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/WK-SU-07/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/secondary_fragment.xml" value="0.1359375" />
+        <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/app/src/main/res/layout/category_item.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/app/src/main/res/layout/country_item.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/recipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.15677083333333333" />
+        <entry key="..\:/Users/eugenio.martinez/Documents/Repos/recipeFinder/recipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.19739583333333333" />
       </map>
     </option>
   </component>

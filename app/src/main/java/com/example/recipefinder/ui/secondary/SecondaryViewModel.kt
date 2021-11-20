@@ -1,4 +1,4 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.secondary
 
 import android.os.Handler
 import androidx.lifecycle.LiveData
@@ -6,19 +6,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.*
+import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SecondaryViewModel @Inject constructor (private val recipeUseCases: RecipeUseCases) : ViewModel() {
+class SecondaryViewModel @Inject constructor(
+    private val recipeUseCases: RecipeUseCases,
+    uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
 
     private val _model = MutableLiveData<Event<SecondaryModel>>()
     val model: LiveData<Event<SecondaryModel>>
         get() = _model
+
+    init {
+        initScope()
+    }
 
     sealed class SecondaryModel {
         class AreaList(val countries: List<Country>) : SecondaryModel()
@@ -35,7 +44,7 @@ class SecondaryViewModel @Inject constructor (private val recipeUseCases: Recipe
         val handler = Handler()
         handler.postDelayed(
             {
-                viewModelScope.launch {
+                launch {
                     when (filterType) {
                         "Countries" -> {
                             when (val response = recipeUseCases.getListOfAreas()) {
@@ -93,7 +102,7 @@ class SecondaryViewModel @Inject constructor (private val recipeUseCases: Recipe
 
     fun filterByArea(country: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.filterByArea(country)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
@@ -108,7 +117,7 @@ class SecondaryViewModel @Inject constructor (private val recipeUseCases: Recipe
 
     fun filterByIngredient(ingredient: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.filterByIngredient(ingredient)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")
@@ -123,7 +132,7 @@ class SecondaryViewModel @Inject constructor (private val recipeUseCases: Recipe
 
     fun filterByCategory(category: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        viewModelScope.launch {
+        launch {
             when (val response = recipeUseCases.filterByCategory(category)) {
                 is Either.Left -> {
                     Logger.d("error en la API: ${response.l}")

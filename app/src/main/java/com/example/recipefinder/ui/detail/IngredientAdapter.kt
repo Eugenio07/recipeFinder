@@ -1,10 +1,10 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipefinder.databinding.IngredientItemBinding
-import com.example.recipefinder.ui.DetailViewModel.IngredientItem
+import com.example.recipefinder.ui.detail.DetailViewModel.IngredientItem
 
 
 class IngredientAdapter(private val itemList: List<IngredientItem>) :

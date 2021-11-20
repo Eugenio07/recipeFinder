@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.recipefinder.ui.DetailViewModel" />
+            type="com.example.recipefinder.ui.detail.DetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

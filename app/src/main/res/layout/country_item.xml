@@ -8,7 +8,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.recipefinder.ui.CountryListener" />
+            type="com.example.recipefinder.ui.secondary.CountryListener" />
     </data>
 
     <LinearLayout

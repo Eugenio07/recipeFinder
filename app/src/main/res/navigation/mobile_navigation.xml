@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/principalFragment"
-        android:name="com.example.recipefinder.ui.PrincipalFragment"
+        android:name="com.example.recipefinder.ui.principal.PrincipalFragment"
         android:label="principal_fragment"
         tools:layout="@layout/principal_fragment" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/secondaryFragment"
-        android:name="com.example.recipefinder.ui.SecondaryFragment"
+        android:name="com.example.recipefinder.ui.secondary.SecondaryFragment"
         android:label="secondary_fragment"
         tools:layout="@layout/secondary_fragment" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.recipefinder.ui.ListFragment"
+        android:name="com.example.recipefinder.ui.list.ListFragment"
         android:label="list_fragment"
         tools:layout="@layout/list_fragment" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.recipefinder.ui.DetailFragment"
+        android:name="com.example.recipefinder.ui.detail.DetailFragment"
         android:label="detail_fragment"
         tools:layout="@layout/detail_fragment" >
         <argument

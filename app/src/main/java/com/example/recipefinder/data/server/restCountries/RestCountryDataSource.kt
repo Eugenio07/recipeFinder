@@ -39,14 +39,10 @@ class RestCountryDataSource(application: Application) : CountriesDataSource {
         suspendCancellableCoroutine { continuation ->
             fusedLocationClient.lastLocation
                 .addOnSuccessListener {
-                    val test = geocoder.getFromLocation(it.latitude, it.longitude, 1)
-                        ?.firstOrNull()
-                    Log.d("PRETTY_LOGGER", "getLocation: $test")
                     continuation.resume(
-                        test?.countryName
+                        geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                            .firstOrNull()?.countryName
                     )
                 }
         }
-
-
 }

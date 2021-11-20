@@ -73,7 +73,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$version_core"
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version_kotlin_coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
@@ -114,5 +114,12 @@ dependencies {
     //Inyector de dependencias
     implementation 'com.google.dagger:hilt-android:2.36'
     kapt 'com.google.dagger:hilt-compiler:2.36'
+
+    //Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "org.mockito:mockito-inline:2.28.2"
+
+    implementation "androidx.arch.core:core-testing:2.1.0"
     
 }

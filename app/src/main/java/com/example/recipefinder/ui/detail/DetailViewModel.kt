@@ -1,45 +1,54 @@
-package com.example.recipefinder.ui
+package com.example.recipefinder.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipefinder.RecipeParcelable
+import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.toRecipe
 import com.example.use.RecipeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val recipeUseCases: RecipeUseCases,
-                                          @Named("RecipeParcelable") recipeParcelable: RecipeParcelable) : ViewModel() {
+class DetailViewModel @Inject constructor(
+    private val recipeUseCases: RecipeUseCases,
+    @Named("RecipeParcelable") recipeParcelable: RecipeParcelable,
+    uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
 
     private var _isFav = MutableLiveData<Boolean>()
     val isFav: LiveData<Boolean>
         get() = _isFav
 
     data class IngredientItem(val name: String?, val measure: String?)
+
     val ingredientsList = mutableListOf<IngredientItem>()
 
     val recipe = recipeParcelable.toRecipe()
 
     init {
+        initScope()
         _isFav.value = false
-        viewModelScope.launch {
-            recipeUseCases.findRecipeByID(recipe.idMeal!!)?.let {
+    }
+
+    fun findRecipe(id: String){
+        launch {
+            recipeUseCases.findRecipeByID(id).let {
                 _isFav.value = true
             }
         }
     }
 
 
-
     fun favClicked() {
-        viewModelScope.launch {
+        launch {
             _isFav.value = !_isFav.value!!
-            if (_isFav.value == true) {
+            if (_isFav.value!!) {
                 recipeUseCases.saveFavoriteRecipe(recipe)
             } else {
                 recipeUseCases.deleteFavoriteRecipe(recipe)
