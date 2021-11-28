@@ -3,7 +3,7 @@ package mockedDomain
 import com.example.domain.Recipe
 
 val mockedRecipe = Recipe(
-    "0",
+    "1",
     "dateModified",
     "strArea",
     "strCategory",

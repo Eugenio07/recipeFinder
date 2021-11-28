@@ -33,14 +33,12 @@ class DetailViewModel @Inject constructor(
 
     init {
         initScope()
-        _isFav.value = false
+        //_isFav.value = false
     }
 
     fun findRecipe(id: String){
         launch {
-            recipeUseCases.findRecipeByID(id).let {
-                _isFav.value = true
-            }
+           if( null != recipeUseCases.findRecipeByID(id)) _isFav.value = true
         }
     }
 
