@@ -4,6 +4,7 @@ import com.example.domain.Category
 import com.example.domain.Country
 import com.example.domain.Ingredient
 import com.example.domain.Recipe
+interface LocalDataSourceTest: LocalDataSource
 
 interface LocalDataSource {
     suspend fun recipeListIsEmpty(): Boolean
