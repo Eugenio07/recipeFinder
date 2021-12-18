@@ -1,5 +1,6 @@
 package com.example.recipefinder
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import com.example.data.repository.CountriesRepository
@@ -24,17 +25,25 @@ import org.hamcrest.CoreMatchers.containsString
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-@HiltAndroidTest
+//@HiltAndroidTest
 //@UninstallModules(AppModule::class)
+@HiltAndroidTest
+@RunWith(MockitoJUnitRunner::class)
 class MainTest {
     @get: Rule
     var hiltRule = HiltAndroidRule(this)
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Inject
     @Named("stringTest")
@@ -62,7 +71,7 @@ class MainTest {
     fun someString(){
         //assertThat(someString,containsString("e"))
         vm.isFav.observeForever(observer)
-        vm.findRecipe("1")
+        vm.findRecipe("0")
         verify(observer).onChanged(true)
     }
 
