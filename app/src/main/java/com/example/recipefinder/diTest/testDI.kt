@@ -1,32 +1,36 @@
 package com.example.recipefinder
 
 import com.example.data.repository.PermissionCheck
-import com.example.data.source.CountriesDataSource
-import com.example.data.source.LocalDataSource
-import com.example.data.source.LocalDataSourceTest
-import com.example.data.source.RemoteDataSource
+import com.example.data.repository.PermissionCheckTest
+import com.example.data.source.*
 import com.example.domain.*
+import com.example.recipefinder.data.server.theMealDB.TheMealApi
+import com.example.recipefinder.data.toRecipe
 import mockedDomain.mockedRecipe
 
-class FakeLocalDataSource: LocalDataSourceTest{
+private val recipeParcelable = RecipeParcelable()
+private var fakeListOfRecipes = mutableListOf(recipeParcelable.toRecipe())
+
+class FakeLocalDataSource : LocalDataSourceTest {
+
+
     override suspend fun recipeListIsEmpty(): Boolean {
-        TODO("Not yet implemented")
+        return fakeListOfRecipes.isEmpty()
     }
 
-    override suspend fun findByID(id: String): Recipe? = if(id == mockedRecipe.idMeal) mockedRecipe else null
+    override suspend fun findByID(id: String): Recipe? =
+        if (id == mockedRecipe.idMeal) mockedRecipe else null
 
 
     override suspend fun addToFavorite(recipe: Recipe) {
-        TODO("Not yet implemented")
+        fakeListOfRecipes.add(recipe)
     }
 
     override suspend fun deleteFromFavorite(recipe: Recipe) {
-        TODO("Not yet implemented")
+        fakeListOfRecipes.remove(recipe)
     }
 
-    override suspend fun getFavorites(): List<Recipe> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getFavorites(): List<Recipe> = fakeListOfRecipes
 
     override suspend fun countryListIsEmpty(): Boolean {
         TODO("Not yet implemented")
@@ -86,10 +90,14 @@ class FakeLocalDataSource: LocalDataSourceTest{
 
 }
 
-class FakeRemoteDataSource: RemoteDataSource {
-    override suspend fun getByName(mealName: String): Either<String, List<Recipe>> {
-        TODO("Not yet implemented")
-    }
+class FakeRemoteDataSource : RemoteDataSourceTest {
+    override suspend fun getByName(mealName: String): Either<String, List<Recipe>> =
+        if (mealName == "Arepa") {
+            Either.Right(fakeListOfRecipes)
+        } else {
+            Either.Left("Connection failure")
+        }
+
 
     override suspend fun getByFirstLetter(letter: String): Either<String, List<Recipe>> {
         TODO("Not yet implemented")
@@ -100,7 +108,7 @@ class FakeRemoteDataSource: RemoteDataSource {
     }
 
     override suspend fun getRandomMeal(): Either<String, List<Recipe>> {
-        TODO("Not yet implemented")
+        return Either.Right(fakeListOfRecipes)
     }
 
     override suspend fun getListOfCategories(): Either<String, List<Category>> {
@@ -128,7 +136,7 @@ class FakeRemoteDataSource: RemoteDataSource {
     }
 }
 
-class FakeCountryDataSource: CountriesDataSource {
+class FakeCountryDataSource : CountriesDataSourceTest {
     override suspend fun getAllCountries(): Either<String, List<Country>> {
         TODO("Not yet implemented")
     }
@@ -138,7 +146,7 @@ class FakeCountryDataSource: CountriesDataSource {
     }
 }
 
-class FakePermissionChecker: PermissionCheck {
+class FakePermissionChecker : PermissionCheckTest {
     override suspend fun request(permission: List<PermissionCheck.Permission>): Pair<Boolean, Boolean> {
         TODO("Not yet implemented")
     }

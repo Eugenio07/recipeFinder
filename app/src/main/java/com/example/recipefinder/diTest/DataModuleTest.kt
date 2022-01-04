@@ -2,11 +2,9 @@ package com.example.recipefinder.di
 
 import com.example.data.repository.CountriesRepository
 import com.example.data.repository.PermissionCheck
+import com.example.data.repository.PermissionCheckTest
 import com.example.data.repository.RecipeRepository
-import com.example.data.source.CountriesDataSource
-import com.example.data.source.LocalDataSource
-import com.example.data.source.LocalDataSourceTest
-import com.example.data.source.RemoteDataSource
+import com.example.data.source.*
 import com.example.recipefinder.PermissionChecker
 import dagger.Module
 import dagger.Provides
@@ -17,18 +15,19 @@ import javax.inject.Named
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModuleTest {
-//    @Provides
-//    fun countriesRepositoryProvider(
-//        localDataSource: LocalDataSource,
-//        countriesDataSource: CountriesDataSource,
-//        permissionChecker: PermissionCheck
-//    ) = CountriesRepository(localDataSource, countriesDataSource, permissionChecker)
+    @Provides
+    @Named("countriesRepositoryProviderTest")
+    fun countriesRepositoryProvider(
+        localDataSource: LocalDataSourceTest,
+        countriesDataSource: CountriesDataSourceTest,
+        permissionChecker: PermissionCheckTest
+    ) = CountriesRepository(localDataSource, countriesDataSource, permissionChecker)
 
     @Provides
-    @Named("recipeRepositoryProviderTest1")
+    @Named("recipeRepositoryProviderTest")
     fun recipeRepositoryProvider(
         localDataSource: LocalDataSourceTest,
-        remoteDataSource: RemoteDataSource,
-        countriesRepository: CountriesRepository
+        remoteDataSource: RemoteDataSourceTest,
+        @Named("countriesRepositoryProviderTest") countriesRepository: CountriesRepository
     ) = RecipeRepository(localDataSource, remoteDataSource, countriesRepository)
 }

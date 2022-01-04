@@ -18,13 +18,16 @@ import javax.inject.Named
 @Module
 @InstallIn(SingletonComponent::class)
 object GeneralModuleTest {
-//    @Provides
-//    fun countryUsesCasesProvider(countriesRepository: CountriesRepository) = CountryUseCases(countriesRepository)
+    @Provides
+    @Named("countryUsesCasesProviderTest")
+    fun countryUsesCasesProvider(
+        @Named("countriesRepositoryProviderTest") countriesRepository: CountriesRepository
+    ) = CountryUseCases(countriesRepository)
 
     @Provides
-    @Named("recipeUsesCasesProviderTest1")
+    @Named("recipeUsesCasesProviderTest")
     fun recipeUsesCasesProvider(
-        @Named("recipeRepositoryProviderTest1")
+        @Named("recipeRepositoryProviderTest")
         recipeRepository: RecipeRepository
     ) = RecipeUseCases(recipeRepository)
 
@@ -34,4 +37,4 @@ object GeneralModuleTest {
 //
 //    @Provides
 //    fun dispatcherProvider(): CoroutineDispatcher = Dispatchers.Main
- }
+}

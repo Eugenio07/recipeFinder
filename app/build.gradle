@@ -126,10 +126,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_android_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_android_version"
 
-    //Testing
-    //testImplementation 'junit:junit:4.13.2'
-//    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-//    testImplementation "org.mockito:mockito-inline:2.28.2"
+//    Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "org.mockito:mockito-inline:2.28.2"
 
     testImplementation 'org.mockito:mockito-core:3.10.0'
     androidTestImplementation 'org.mockito:mockito-android:3.10.0'
