@@ -26,6 +26,8 @@
             android:hint="@string/search_recipe_by_name"
             android:imeOptions="actionSearch"
             android:singleLine="true"
+            android:background="@color/primaryColor"
+            android:padding="@dimen/spacing_xmedium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
