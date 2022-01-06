@@ -20,6 +20,7 @@ interface LocalDataSource {
     suspend fun getRecipeCountryList(): List<Country>
     suspend fun getCountryListByDemonym(demonyms: List<String>): List<Country>
     suspend fun isInRecipeList(country: String): Boolean
+    suspend fun getCountryByCode(country: String): Country
 
     suspend fun categoryListIsEmpty(): Boolean
     suspend fun getCategoryList(): List<Category>

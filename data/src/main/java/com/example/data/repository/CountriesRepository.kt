@@ -24,14 +24,18 @@ class CountriesRepository(
     suspend fun getLocation(): String {
         var response = "Unknown"
         if (permissionChecker.request(arrayListOf(COARSE_LOCATION, FINE_LOCATION)).first) {
-            countriesDataSource.getLocation()?.let { country ->
-                if (localDataSource.isInRecipeList(country)) {
-                    response = country
-                }
+            val location = countriesDataSource.getLocation() ?: "Unknown"
+            println(location)
+            if (localDataSource.isInRecipeList(location)) {
+                response = location
             }
         }
+        println(response)
         return response
     }
+
+    suspend fun getCountryByCode(code: String): Country = localDataSource.getCountryByCode(code)
+
 }
 
 interface PermissionCheck {

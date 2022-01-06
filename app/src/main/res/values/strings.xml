@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Recipe Finder</string>
     <string name="favorites">Favorites</string>
-    <string name="category">Category</string>
+    <string name="category">Categories</string>
     <string name="random_recipe">Random</string>
-    <string name="ingredient">Ingredient</string>
+    <string name="ingredient">Ingredients</string>
     <string name="countries">Countries</string>
     <string name="search_recipe_by_name">Search recipe by name</string>
+    <string name="find_my_country_recipes">Look for %s recipes</string>
 </resources>

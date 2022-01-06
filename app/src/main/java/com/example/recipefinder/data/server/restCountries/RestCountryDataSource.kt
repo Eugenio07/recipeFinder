@@ -39,9 +39,11 @@ class RestCountryDataSource(application: Application) : CountriesDataSource {
         suspendCancellableCoroutine { continuation ->
             fusedLocationClient.lastLocation
                 .addOnSuccessListener {
-                    continuation.resume(
+                   continuation.resume(
                         geocoder.getFromLocation(it.latitude, it.longitude, 1)
-                            .firstOrNull()?.countryName
+                       //geocoder.getFromLocation(25.806567, -80.258330, 1)//EEUU
+                       //geocoder.getFromLocation(40.386780, -3.725048, 1)//España
+                            .firstOrNull()?.countryCode
                     )
                 }
         }

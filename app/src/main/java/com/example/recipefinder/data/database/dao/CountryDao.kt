@@ -21,8 +21,8 @@ interface CountryDao {
     @Query("SELECT * FROM CountryDB WHERE demonym IN (:demonym)")
     fun getCountriesByDemonym(demonym: List<String>): List<CountryDB>
 
-    @Query("SELECT * FROM CountryDB WHERE name = :country")
-    fun isInRecipeList(country: String): CountryDB?
+    @Query("SELECT * FROM CountryDB WHERE code = :country")
+    fun getCountryByCode(country: String): CountryDB?
 
     @Update
     fun updateCountries(countries: List<CountryDB>)

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.*
 import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
+import com.example.use.CountryUseCases
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SecondaryViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases,
+    private val countryUseCases: CountryUseCases,
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
@@ -25,12 +27,14 @@ class SecondaryViewModel @Inject constructor(
     val model: LiveData<Event<SecondaryModel>>
         get() = _model
 
+    private lateinit var country: Country
+
     init {
         initScope()
     }
 
     sealed class SecondaryModel {
-        class AreaList(val countries: List<Country>) : SecondaryModel()
+        class AreaList(val countries: List<Country>, val country: Country) : SecondaryModel()
         class CategoryList(val categories: List<Category>) : SecondaryModel()
         class IngredientList(val ingredients: List<Ingredient>) : SecondaryModel()
 
@@ -55,9 +59,11 @@ class SecondaryViewModel @Inject constructor(
                                 }
                                 is Either.Right -> {
                                     Logger.d("getListOfAreas: ${response.r}")
+                                    val location = countryUseCases.getLocation()
+                                    country = countryUseCases.getCountryByCode(location)
                                     _model.value =
                                         Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
-                                    _model.value = Event(SecondaryModel.AreaList(response.r))
+                                    _model.value = Event(SecondaryModel.AreaList(response.r, country))
                                 }
                             }
                         }
@@ -98,6 +104,10 @@ class SecondaryViewModel @Inject constructor(
             },
             500
         )
+    }
+
+    fun myCountryRecipes(){
+        filterByArea(country.demonym!!)
     }
 
     fun filterByArea(country: String) {
