@@ -42,7 +42,8 @@ class SecondaryFragment : Fragment() {
         mViewModel.getListOfFilters(
             SecondaryFragmentArgs.fromBundle(
                 requireArguments()
-            ).filterType)
+            ).filterType
+        )
     }
 
     private fun changedUI(event: Event<SecondaryModel>) {
@@ -51,35 +52,40 @@ class SecondaryFragment : Fragment() {
                 is AreaList -> {
                     Logger.d("Countries: ${model.countries}")
                     binding.textView.text = getString(R.string.countries)
-                    binding.btnMyCountry.text = getString(R.string.find_my_country_recipes, model.country.demonym)
+                    binding.btnMyCountry.text =
+                        getString(R.string.find_my_country_recipes, model.country.demonym)
                     binding.btnMyCountry.visibility = VISIBLE
-                    Glide.with(binding.root)
-                        .load(model.country.flag)
-                        .into(binding.countryImage1)
-                    Glide.with(binding.root)
-                        .load(model.country.flag)
-                        .into(binding.countryImage2)
-                    binding.countryImage1.visibility = VISIBLE
-                    binding.countryImage2.visibility = VISIBLE
-                    binding.rvSecondary.adapter = CountryAdapter(model.countries, CountryListener { country ->
-                        country.demonym?.let { mViewModel.filterByArea(it) }
-                    })
+                    model.country.flag?.let {
+                        Glide.with(binding.root)
+                            .load(model.country.flag)
+                            .into(binding.countryImage1)
+                        Glide.with(binding.root)
+                            .load(model.country.flag)
+                            .into(binding.countryImage2)
+                        binding.countryImage1.visibility = VISIBLE
+                        binding.countryImage2.visibility = VISIBLE
+                    }
+
+                    binding.rvSecondary.adapter =
+                        CountryAdapter(model.countries, CountryListener { country ->
+                            country.demonym?.let { mViewModel.filterByArea(it) }
+                        })
                 }
                 is CategoryList -> {
                     Logger.d("Categories: ${model.categories}")
                     binding.textView.text = getString(R.string.category)
                     binding.rvSecondary.adapter = CategoriesAdapter(model.categories,
                         CategoryListener {
-                        it.strCategory?.let { it1 -> mViewModel.filterByCategory(it1) }
-                    })
-                   // mViewModel.filterByCategory(model.categories[0].strCategory!!)
+                            it.strCategory?.let { it1 -> mViewModel.filterByCategory(it1) }
+                        })
+                    // mViewModel.filterByCategory(model.categories[0].strCategory!!)
                 }
                 is IngredientList -> {
                     binding.textView.text = getString(R.string.ingredient)
                     binding.rvSecondary.adapter = IngredientListAdapter(model.ingredients,
                         IngredientListener {
-                        it.strIngredient?.let { it1 -> mViewModel.filterByIngredient(it1) }
-                    })
+                            it.strIngredient?.let { it1 -> mViewModel.filterByIngredient(it1) }
+                        })
                 }
                 is FilteredRecipeList -> {
                     val list = RecipeList()
@@ -92,7 +98,7 @@ class SecondaryFragment : Fragment() {
                         )
                 }
                 is Network -> {
-                    when(model.networkStatus){
+                    when (model.networkStatus) {
                         NETWORK_STATUS.DONE, NETWORK_STATUS.ERROR -> {
                             binding.progressCircular.visibility = GONE
                         }

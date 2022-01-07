@@ -60,7 +60,8 @@ class SecondaryViewModel @Inject constructor(
                                 is Either.Right -> {
                                     Logger.d("getListOfAreas: ${response.r}")
                                     val location = countryUseCases.getLocation()
-                                    country = countryUseCases.getCountryByCode(location)
+                                    country = if(location != "Unknown") countryUseCases.getCountryByCode(location) else
+                                        Country("Unknown", "Unknown", "Unknown", null, false)
                                     _model.value =
                                         Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
                                     _model.value = Event(SecondaryModel.AreaList(response.r, country))
