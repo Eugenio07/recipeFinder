@@ -14,6 +14,22 @@
         <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/app/src/main/res/layout/category_item.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/app/src/main/res/layout/country_item.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/emartinez/Documents/Repos/recipeFinder/recipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.15677083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_categorias.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_favorite.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_ingredientes.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_launcher_background.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_mapamundi.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/drawable/ic_random.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/activity_main.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/category_item.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/country_item.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/ingredient_item.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/ingredient_item_list.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/list_fragment.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/principal_fragment.xml" value="0.44479166666666664" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/recipe_item.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/RecipeFinder/app/src/main/res/layout/secondary_fragment.xml" value="0.21967213114754097" />
         <entry key="..\:/Users/eugenio.martinez/Documents/Repos/recipeFinder/recipeFinder/app/src/main/res/layout/detail_fragment.xml" value="0.19739583333333333" />
       </map>
     </option>

@@ -43,13 +43,6 @@
                     android:src="@drawable/ic_launcher_background"
                     app:layout_collapseMode="parallax" />
 
-                <!--                <View-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="250dp"-->
-                <!--                    android:background="@drawable/bg_gradient"-->
-                <!--                    android:fitsSystemWindows="true" />-->
-
-
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -78,22 +71,6 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_large">
 
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="description"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_marginBottom="@dimen/spacing_middle"
-                    android:background="@color/secondaryDarkColor" />
-
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,14 +85,6 @@
                     android:layout_height="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
-
-<!--                <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:visibility="visible">-->
-
-<!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -154,6 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_mlarge"
             android:clickable="true"
+            android:focusable="true"
             android:tint="@android:color/white"
             android:src="@drawable/ic_no_favorite"
             android:onClick="@{()->viewModel.favClicked()}"

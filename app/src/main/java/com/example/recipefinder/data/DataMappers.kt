@@ -299,10 +299,10 @@ fun RecipeParcelable.toRecipe(): Recipe =
 fun AreasListResponse.Meal.toCountryString(): String = strArea!!
 
 fun CountryDB.toDomainCountry(): Country =
-    Country(name, demonym, flag, recipeCountry)
+    Country(name, demonym, code, flag, recipeCountry)
 
 fun Country.toAreaDB(): CountryDB =
-    CountryDB(strArea!!, demonym, flag, recipeCountry)
+    CountryDB(strArea!!, demonym, code, flag, recipeCountry)
 
 fun CategoryResponse.Category.toDomainCategory(): Category =
     Category(idCategory, strCategory, strCategoryThumb, strCategoryDescription)
@@ -326,4 +326,4 @@ fun GeneralMealResponse.Meal.toFilterRecipe(): Recipe =
     Recipe(strMeal = strMeal, strMealThumb = strMealThumb, idMeal = idMeal)
 
 fun RestCountryResponse.toDomainCountry(): Country =
-    Country(name, demonym, flags?.png)
+    Country(name, demonym, alpha2Code, flags?.png)

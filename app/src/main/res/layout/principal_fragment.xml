@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
+        android:background="@color/secondaryColor"
         tools:context=".ui.principal.PrincipalFragment">
 
 
@@ -25,6 +26,8 @@
             android:hint="@string/search_recipe_by_name"
             android:imeOptions="actionSearch"
             android:singleLine="true"
+            android:background="@color/primaryColor"
+            android:padding="@dimen/spacing_xmedium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@color/secondaryLightColor"
+            android:background="@color/primaryColor"
             android:orientation="vertical"
             android:padding="16dp"
             android:onClick="@{()->viewModel.filterClicked(@string/countries)}"
@@ -46,13 +49,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_mapamundi" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 android:text="@string/countries" />
 
         </LinearLayout>
@@ -62,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@color/secondaryLightColor"
+            android:background="@color/primaryColor"
             android:orientation="vertical"
             android:padding="16dp"
             android:onClick="@{()->viewModel.filterClicked(@string/ingredient)}"
@@ -74,13 +79,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_ingredientes" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 android:text="@string/ingredient" />
 
         </LinearLayout>
@@ -90,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@color/secondaryLightColor"
+            android:background="@color/primaryColor"
             android:orientation="vertical"
             android:padding="16dp"
             android:onClick="@{()->viewModel.filterClicked(@string/category)}"
@@ -102,13 +109,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_categorias" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 android:text="@string/category" />
 
         </LinearLayout>
@@ -118,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@color/secondaryLightColor"
+            android:background="@color/primaryColor"
             android:orientation="vertical"
             android:padding="16dp"
             android:onClick="@{()->viewModel.randomClicked()}"
@@ -130,13 +139,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_random" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 android:text="@string/random_recipe" />
 
         </LinearLayout>
@@ -146,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/secondaryLightColor"
+            android:background="@color/primaryColor"
             android:orientation="vertical"
             android:padding="16dp"
             android:onClick="@{()->viewModel.favoriteClicked()}"
@@ -157,13 +168,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_favorite" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 android:text="@string/favorites" />
 
         </LinearLayout>
