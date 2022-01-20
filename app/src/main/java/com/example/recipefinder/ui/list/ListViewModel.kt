@@ -30,8 +30,8 @@ class ListViewModel @Inject constructor(
     }
 
     sealed class ListModel {
-        class GoToDetail(val recipe: Recipe) : ListModel()
-        class Network(val networkStatus: NETWORK_STATUS) : ListModel()
+        data class GoToDetail(val recipe: Recipe) : ListModel()
+        data class Network(val networkStatus: NETWORK_STATUS) : ListModel()
     }
 
     fun recipeClicked(recipe: Recipe) {

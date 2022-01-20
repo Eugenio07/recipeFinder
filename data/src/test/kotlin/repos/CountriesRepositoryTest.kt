@@ -116,25 +116,6 @@ class CountriesRepositoryTest {
     }
 
     @Test
-    fun `get location country not found`() {
-        runBlocking {
-            whenever(
-                permissionChecker.request(
-                    arrayListOf(
-                        COARSE_LOCATION,
-                        FINE_LOCATION
-                    )
-                )
-            ).thenReturn(Pair(true, second = false))
-            whenever(countriesDataSource.getLocation()).thenReturn(null)
-
-            val result = countriesRepository.getLocation()
-
-            Assert.assertEquals("Unknown", result)
-        }
-    }
-
-    @Test
     fun `get location country is not in recipe list`() {
         runBlocking {
             val country = mockedCountry.strArea
