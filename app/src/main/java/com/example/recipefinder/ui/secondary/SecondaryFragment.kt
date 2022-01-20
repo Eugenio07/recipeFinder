@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
+import android.view.View.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +12,7 @@ import com.example.recipefinder.R
 import com.example.recipefinder.databinding.SecondaryFragmentBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.domain.Event
 import com.example.recipefinder.RecipeList
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
@@ -40,7 +42,8 @@ class SecondaryFragment : Fragment() {
         mViewModel.getListOfFilters(
             SecondaryFragmentArgs.fromBundle(
                 requireArguments()
-            ).filterType)
+            ).filterType
+        )
     }
 
     private fun changedUI(event: Event<SecondaryModel>) {
@@ -48,26 +51,41 @@ class SecondaryFragment : Fragment() {
             when (model) {
                 is AreaList -> {
                     Logger.d("Countries: ${model.countries}")
-                    binding.textView.text = "Countries"
-                    binding.rvSecondary.adapter = CountryAdapter(model.countries, CountryListener { country ->
-                        country.demonym?.let { mViewModel.filterByArea(it) }
-                    })
+                    binding.textView.text = getString(R.string.countries)
+                    binding.btnMyCountry.text =
+                        getString(R.string.find_my_country_recipes, model.country.demonym)
+                    binding.btnMyCountry.visibility = VISIBLE
+                    model.country.flag?.let {
+                        Glide.with(binding.root)
+                            .load(model.country.flag)
+                            .into(binding.countryImage1)
+                        Glide.with(binding.root)
+                            .load(model.country.flag)
+                            .into(binding.countryImage2)
+                        binding.countryImage1.visibility = VISIBLE
+                        binding.countryImage2.visibility = VISIBLE
+                    }
+
+                    binding.rvSecondary.adapter =
+                        CountryAdapter(model.countries, CountryListener { country ->
+                            country.demonym?.let { mViewModel.filterByArea(it) }
+                        })
                 }
                 is CategoryList -> {
                     Logger.d("Categories: ${model.categories}")
-                    binding.textView.text = "Categories"
+                    binding.textView.text = getString(R.string.category)
                     binding.rvSecondary.adapter = CategoriesAdapter(model.categories,
                         CategoryListener {
-                        it.strCategory?.let { it1 -> mViewModel.filterByCategory(it1) }
-                    })
-                   // mViewModel.filterByCategory(model.categories[0].strCategory!!)
+                            it.strCategory?.let { it1 -> mViewModel.filterByCategory(it1) }
+                        })
+                    // mViewModel.filterByCategory(model.categories[0].strCategory!!)
                 }
                 is IngredientList -> {
-                    binding.textView.text = "Ingredients"
+                    binding.textView.text = getString(R.string.ingredient)
                     binding.rvSecondary.adapter = IngredientListAdapter(model.ingredients,
                         IngredientListener {
-                        it.strIngredient?.let { it1 -> mViewModel.filterByIngredient(it1) }
-                    })
+                            it.strIngredient?.let { it1 -> mViewModel.filterByIngredient(it1) }
+                        })
                 }
                 is FilteredRecipeList -> {
                     val list = RecipeList()
@@ -80,12 +98,12 @@ class SecondaryFragment : Fragment() {
                         )
                 }
                 is Network -> {
-                    when(model.networkStatus){
+                    when (model.networkStatus) {
                         NETWORK_STATUS.DONE, NETWORK_STATUS.ERROR -> {
-                            binding.progressCircular.visibility = View.GONE
+                            binding.progressCircular.visibility = GONE
                         }
                         NETWORK_STATUS.LOADING -> {
-                            binding.progressCircular.visibility = View.VISIBLE
+                            binding.progressCircular.visibility = VISIBLE
                         }
                     }
                 }

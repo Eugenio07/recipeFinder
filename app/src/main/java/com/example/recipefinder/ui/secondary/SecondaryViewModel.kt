@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.*
 import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
+import com.example.use.CountryUseCases
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SecondaryViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases,
+    private val countryUseCases: CountryUseCases,
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
@@ -25,79 +27,90 @@ class SecondaryViewModel @Inject constructor(
     val model: LiveData<Event<SecondaryModel>>
         get() = _model
 
+    private lateinit var country: Country
+
     init {
         initScope()
     }
 
     sealed class SecondaryModel {
-        class AreaList(val countries: List<Country>) : SecondaryModel()
-        class CategoryList(val categories: List<Category>) : SecondaryModel()
-        class IngredientList(val ingredients: List<Ingredient>) : SecondaryModel()
-
-        class Network(val networkStatus: NETWORK_STATUS) : SecondaryModel()
-
-        class FilteredRecipeList(val listOfRecipes: List<Recipe>) : SecondaryModel()
+        data class AreaList(val countries: List<Country>, val country: Country) : SecondaryModel()
+        data class CategoryList(val categories: List<Category>) : SecondaryModel()
+        data class IngredientList(val ingredients: List<Ingredient>) : SecondaryModel()
+        data class Network(val networkStatus: NETWORK_STATUS) : SecondaryModel()
+        data class FilteredRecipeList(val listOfRecipes: List<Recipe>) : SecondaryModel()
     }
 
     fun getListOfFilters(filterType: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        val handler = Handler()
-        handler.postDelayed(
-            {
-                launch {
-                    when (filterType) {
-                        "Countries" -> {
-                            when (val response = recipeUseCases.getListOfAreas()) {
-                                is Either.Left -> {
-                                    Logger.d("error en la API: ${response.l}")
-                                    _model.value =
-                                        Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
-                                }
-                                is Either.Right -> {
-                                    Logger.d("getListOfAreas: ${response.r}")
-                                    _model.value =
-                                        Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
-                                    _model.value = Event(SecondaryModel.AreaList(response.r))
-                                }
-                            }
+        //   val handler = Handler()
+        //  handler.postDelayed(
+        //{
+        launch {
+            when (filterType) {
+                "Countries" -> {
+                    when (val response = recipeUseCases.getListOfAreas()) {
+                        is Either.Left -> {
+                            Logger.d("error en la API: ${response.l}")
+                            _model.value =
+                                Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
                         }
-                        "Ingredient" -> {
-                            when (val response = recipeUseCases.getListOfIngredients()) {
-                                is Either.Left -> {
-                                    Logger.d("error en la API: ${response.l}")
-                                    _model.value =
-                                        Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
-                                }
-                                is Either.Right -> {
-                                    Logger.d("getListOfIngredients prueba nombre: ${response.r[0].strIngredient}")
-                                    Logger.d("id: ${response.r[0].idIngredient}")
-                                    _model.value =
-                                        Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
-                                    _model.value = Event(SecondaryModel.IngredientList(response.r))
-                                }
-                            }
-                        }
-                        "Category" -> {
-                            when (val response = recipeUseCases.getListOfCategories()) {
-                                is Either.Left -> {
-                                    Logger.d("error en la API: ${response.l}")
-                                    _model.value =
-                                        Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
-                                }
-                                is Either.Right -> {
-                                    Logger.d("getCategories prueba nombre: ${response.r[0].strCategory}")
-                                    Logger.d("id: ${response.r[0].idCategory}")
-                                    _model.value =
-                                        Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
-                                    _model.value = Event(SecondaryModel.CategoryList(response.r))
-                                }
-                            }
+                        is Either.Right -> {
+                            Logger.d("getListOfAreas: ${response.r}")
+                            val location = countryUseCases.getLocation()
+                            country =
+                                if (location != "Unknown") countryUseCases.getCountryByCode(
+                                    location
+                                ) else
+                                    Country("Unknown", "Unknown", "Unknown", null, false)
+                            _model.value =
+                                Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
+                            _model.value =
+                                Event(SecondaryModel.AreaList(response.r, country))
                         }
                     }
                 }
-            },
-            500
-        )
+                "Ingredient" -> {
+                    when (val response = recipeUseCases.getListOfIngredients()) {
+                        is Either.Left -> {
+                            Logger.d("error en la API: ${response.l}")
+                            _model.value =
+                                Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
+                        }
+                        is Either.Right -> {
+                            Logger.d("getListOfIngredients prueba nombre: ${response.r[0].strIngredient}")
+                            Logger.d("id: ${response.r[0].idIngredient}")
+                            _model.value =
+                                Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
+                            _model.value = Event(SecondaryModel.IngredientList(response.r))
+                        }
+                    }
+                }
+                "Category" -> {
+                    when (val response = recipeUseCases.getListOfCategories()) {
+                        is Either.Left -> {
+                            Logger.d("error en la API: ${response.l}")
+                            _model.value =
+                                Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
+                        }
+                        is Either.Right -> {
+                            Logger.d("getCategories prueba nombre: ${response.r[0].strCategory}")
+                            Logger.d("id: ${response.r[0].idCategory}")
+                            _model.value =
+                                Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
+                            _model.value = Event(SecondaryModel.CategoryList(response.r))
+                        }
+                    }
+                }
+            }
+        }
+/* },
+ 500
+)*/
+    }
+
+    fun myCountryRecipes() {
+        filterByArea(country.demonym!!)
     }
 
     fun filterByArea(country: String) {

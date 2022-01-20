@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/secondaryColor"
         tools:context=".ui.secondary.SecondaryFragment">
 
         <TextView
@@ -19,11 +20,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="20sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_my_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_my_country_recipes"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{()->viewModel.myCountryRecipes()}"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/country_image_1"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_margin="@dimen/spacing_medium"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintTop_toTopOf="@id/btn_my_country"
+            app:layout_constraintEnd_toStartOf="@id/btn_my_country"
+            android:visibility="gone"
+            />
+
+        <ImageView
+            android:id="@+id/country_image_2"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_margin="@dimen/spacing_medium"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintTop_toTopOf="@id/btn_my_country"
+            app:layout_constraintStart_toEndOf="@id/btn_my_country"
+            android:visibility="gone"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_secondary"
@@ -32,7 +69,7 @@
             android:layout_marginTop="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_my_country" />
 
 
         <com.google.android.material.progressindicator.CircularProgressIndicator

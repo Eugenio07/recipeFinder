@@ -1,6 +1,5 @@
 package com.example.recipefinder.data.database.db
 
-import android.util.Log
 import com.example.data.source.LocalDataSource
 import com.example.domain.Category
 import com.example.domain.Country
@@ -59,8 +58,10 @@ class RoomDataSource(db: RecipeDataBase) : LocalDataSource {
         withContext(Dispatchers.IO) { countryDao.getCountriesByDemonym(demonyms).map { it.toDomainCountry() } }
 
     override suspend fun isInRecipeList(country: String): Boolean =
-        withContext(Dispatchers.IO) { countryDao.isInRecipeList(country)?.recipeCountry?: false}
+        withContext(Dispatchers.IO) { countryDao.getCountryByCode(country)?.recipeCountry?: false}
 
+    override suspend fun getCountryByCode(country: String): Country =
+        withContext(Dispatchers.IO) { countryDao.getCountryByCode(country)!!.toDomainCountry()}
 
     override suspend fun categoryListIsEmpty(): Boolean =
         withContext(Dispatchers.IO) { categoryDao.categoryCount() <= 0 }

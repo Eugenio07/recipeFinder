@@ -2,8 +2,6 @@ package com.example.recipefinder.ui.principal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
 import com.example.domain.Event
 import com.example.domain.Recipe

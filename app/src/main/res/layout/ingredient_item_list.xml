@@ -25,9 +25,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"
             android:gravity="center_vertical"
             android:minHeight="?attr/actionBarSize"
+            android:background="@color/primaryLightColor"
             android:onClick="@{() -> clickListener.onClick(ingredient)}"
             android:orientation="horizontal">
 
@@ -45,6 +45,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="Item Title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
