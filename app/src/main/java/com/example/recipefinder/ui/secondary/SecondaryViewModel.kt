@@ -70,7 +70,7 @@ class SecondaryViewModel @Inject constructor(
                         }
                     }
                 }
-                "Ingredient" -> {
+                "Ingredients" -> {
                     when (val response = recipeUseCases.getListOfIngredients()) {
                         is Either.Left -> {
                             Logger.d("error en la API: ${response.l}")
@@ -86,7 +86,7 @@ class SecondaryViewModel @Inject constructor(
                         }
                     }
                 }
-                "Category" -> {
+                "Categories" -> {
                     when (val response = recipeUseCases.getListOfCategories()) {
                         is Either.Left -> {
                             Logger.d("error en la API: ${response.l}")
