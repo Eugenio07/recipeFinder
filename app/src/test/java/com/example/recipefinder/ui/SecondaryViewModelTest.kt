@@ -62,7 +62,7 @@ class SecondaryViewModelTest {
             vm.model.observeForever(observer)
             val categories = Either.Right(listOf(mockedCategory))
             whenever(recipeUseCases.getListOfCategories()).thenReturn(categories)
-            vm.getListOfFilters("Category")
+            vm.getListOfFilters("Categories")
             verify(observer).onChanged(Event(SecondaryModel.Network(NETWORK_STATUS.LOADING)))
             verify(observer).onChanged(Event(SecondaryModel.Network(NETWORK_STATUS.DONE)))
             verify(observer).onChanged(Event(SecondaryModel.CategoryList(categories.r)))
@@ -76,7 +76,7 @@ class SecondaryViewModelTest {
             vm.model.observeForever(observer)
             val categories = Either.Left("Connection failure")
             whenever(recipeUseCases.getListOfCategories()).thenReturn(categories)
-            vm.getListOfFilters("Category")
+            vm.getListOfFilters("Categories")
             verify(observer).onChanged(Event(SecondaryModel.Network(NETWORK_STATUS.LOADING)))
             verify(observer).onChanged(Event(SecondaryModel.Network(NETWORK_STATUS.ERROR)))
         }

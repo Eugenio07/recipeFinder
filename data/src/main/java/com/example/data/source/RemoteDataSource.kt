@@ -2,6 +2,8 @@ package com.example.data.source
 
 import com.example.domain.*
 
+interface RemoteDataSourceTest: RemoteDataSource
+
 interface RemoteDataSource {
 
     suspend fun getByName(mealName: String): Either<String, List<Recipe>>

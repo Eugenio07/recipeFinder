@@ -9,6 +9,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
 
     implementation "junit:junit:$junit_version"
+    implementation 'junit:junit:4.12'
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mokito_kotlin_version"
     testImplementation "org.mockito:mockito-inline:$mokito_inline_version"
 }

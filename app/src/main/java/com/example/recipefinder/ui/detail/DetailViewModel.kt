@@ -21,7 +21,7 @@ class DetailViewModel @Inject constructor(
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
-    private var _isFav = MutableLiveData<Boolean>()
+    private var _isFav = MutableLiveData(false)
     val isFav: LiveData<Boolean>
         get() = _isFav
 
@@ -38,7 +38,10 @@ class DetailViewModel @Inject constructor(
 
     fun findRecipe(id: String){
         launch {
-            recipeUseCases.findRecipeByID(id).let {
+//            recipeUseCases.findRecipeByID(id).let {
+//                _isFav.value = true
+//            }
+            if(recipeUseCases.findRecipeByID(id) != null){
                 _isFav.value = true
             }
         }
@@ -49,7 +52,7 @@ class DetailViewModel @Inject constructor(
         launch {
             _isFav.value = !_isFav.value!!
             if (_isFav.value!!) {
-                recipeUseCases.saveFavoriteRecipe(recipe)
+               recipeUseCases.saveFavoriteRecipe(recipe)
             } else {
                 recipeUseCases.deleteFavoriteRecipe(recipe)
             }

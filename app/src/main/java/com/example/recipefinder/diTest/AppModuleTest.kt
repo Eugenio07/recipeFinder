@@ -2,10 +2,9 @@ package com.example.recipefinder.di
 
 import android.app.Application
 import com.example.data.repository.PermissionCheck
-import com.example.data.source.CountriesDataSource
-import com.example.data.source.LocalDataSource
-import com.example.data.source.RemoteDataSource
-import com.example.recipefinder.PermissionChecker
+import com.example.data.repository.PermissionCheckTest
+import com.example.data.source.*
+import com.example.recipefinder.*
 import com.example.recipefinder.data.database.db.RecipeDataBase
 import com.example.recipefinder.data.database.db.RoomDataSource
 import com.example.recipefinder.data.server.restCountries.RestCountryDataSource
@@ -19,26 +18,26 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object AppModule {
+object AppModuleTest {
     @Provides
     @Singleton
     fun provideSomeString(): String{
         return "Hola eugenio"
     }
 
-    @Provides
-    @Singleton
-    fun dataBaseProvider(app:Application) = RecipeDataBase.getInstance(app.applicationContext)
+//    @Provides
+//    @Singleton
+//    fun dataBaseProvider(app:Application) = RecipeDataBase.getInstance(app.applicationContext)
 
     @Provides
-    fun localDataSourceProvider(db: RecipeDataBase): LocalDataSource = RoomDataSource(db)
+    fun localDataSourceProvider(): LocalDataSourceTest = FakeLocalDataSource()
 
     @Provides
-    fun remoteDataSourceProvider(): RemoteDataSource = TheMealDBDataSource()
+    fun remoteDataSourceProvider(): RemoteDataSourceTest = FakeRemoteDataSource()
 
     @Provides
-    fun countriesDataSourceProvider(app:Application): CountriesDataSource = RestCountryDataSource(app)
+    fun countriesDataSourceProvider(): CountriesDataSourceTest = FakeCountryDataSource()
 
     @Provides
-    fun permissionCheckerProvider(app: Application): PermissionCheck = PermissionChecker(app)
+    fun permissionCheckerProvider(): PermissionCheckTest = FakePermissionChecker()
 }

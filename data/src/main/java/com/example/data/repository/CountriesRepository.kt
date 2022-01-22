@@ -38,6 +38,8 @@ class CountriesRepository(
 
 }
 
+interface PermissionCheckTest: PermissionCheck
+
 interface PermissionCheck {
     enum class Permission {
         COARSE_LOCATION,
