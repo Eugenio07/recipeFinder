@@ -3,10 +3,9 @@ package com.example.recipefinder
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.domain.Event
-import com.example.domain.Recipe
 import com.example.recipefinder.data.toRecipe
-import com.example.recipefinder.ui.principal.PrincipalViewModel
-import com.example.recipefinder.ui.principal.PrincipalViewModel.PrincipalModel
+import com.example.recipefinder.ui.list.ListViewModel
+import com.example.recipefinder.ui.list.ListViewModel.ListModel
 import com.example.use.RecipeUseCases
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -23,8 +22,7 @@ import javax.inject.Named
 
 @HiltAndroidTest
 @RunWith(MockitoJUnitRunner::class)
-class PrincipalIntegrationTest {
-
+class ListIntegrationTest {
     @get: Rule
     var hiltRule = HiltAndroidRule(this)
 
@@ -36,31 +34,22 @@ class PrincipalIntegrationTest {
     lateinit var recipeUseCases: RecipeUseCases
 
     @Mock
-    lateinit var observer: Observer<Event<PrincipalModel>>
-    private lateinit var vm: PrincipalViewModel
+    lateinit var observer: Observer<Event<ListModel>>
+
+    private lateinit var vm: ListViewModel
 
     private val  recipeParcelable = RecipeParcelable()
-    private var fakeListOfRecipes = mutableListOf<Recipe>()
 
     @Before
     fun setUp(){
         hiltRule.inject()
-        vm = PrincipalViewModel(recipeUseCases, Dispatchers.Unconfined)
+        vm = ListViewModel(recipeUseCases, Dispatchers.Unconfined)
     }
 
     @Test
-    fun randomClicked(){
+    fun recipeClicked(){
         vm.model.observeForever(observer)
-        vm.randomClicked()
-        verify(observer).onChanged(Event(PrincipalModel.GoToDetail(recipeParcelable.toRecipe())))
+        vm.recipeClicked(recipeParcelable.toRecipe())
+        verify(observer).onChanged(Event(ListModel.GoToDetail(recipeParcelable.toRecipe())))
     }
-
-    @Test
-    fun findByName(){
-        vm.model.observeForever(observer)
-        vm.searchedByName("Arepa")
-        fakeListOfRecipes.add(recipeParcelable.toRecipe())
-        verify(observer).onChanged(Event(PrincipalModel.GoToList(fakeListOfRecipes)))
-    }
-
 }

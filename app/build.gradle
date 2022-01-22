@@ -123,8 +123,8 @@ dependencies {
     implementation 'com.orhanobut:logger:2.2.0'
 
     //Inyector de dependencias
-    implementation "com.google.dagger:hilt-android:$hilt_android_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_android_version"
+    implementation 'com.google.dagger:hilt-android:2.36'
+    kapt 'com.google.dagger:hilt-compiler:2.36'
 
 //    Testing
     testImplementation 'junit:junit:4.13.2'

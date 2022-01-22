@@ -6,10 +6,12 @@ import com.example.data.source.*
 import com.example.domain.*
 import com.example.recipefinder.data.server.theMealDB.TheMealApi
 import com.example.recipefinder.data.toRecipe
+import mockedDomain.mockedCountry
 import mockedDomain.mockedRecipe
 
 private val recipeParcelable = RecipeParcelable()
 private var fakeListOfRecipes = mutableListOf(recipeParcelable.toRecipe())
+private var fakeListOfCountries = mutableListOf(mockedCountry)
 
 class FakeLocalDataSource : LocalDataSourceTest {
 
@@ -36,9 +38,7 @@ class FakeLocalDataSource : LocalDataSourceTest {
         TODO("Not yet implemented")
     }
 
-    override suspend fun recipeCountryListIsEmpty(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override suspend fun recipeCountryListIsEmpty(): Boolean = true
 
     override suspend fun getCountryList(): List<Country> {
         TODO("Not yet implemented")
@@ -49,20 +49,16 @@ class FakeLocalDataSource : LocalDataSourceTest {
     }
 
     override suspend fun updateCountryList(countries: List<Country>) {
-        TODO("Not yet implemented")
+
     }
 
-    override suspend fun getRecipeCountryList(): List<Country> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getRecipeCountryList(): List<Country> = fakeListOfCountries
 
-    override suspend fun getCountryListByDemonym(demonyms: List<String>): List<Country> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCountryListByDemonym(demonyms: List<String>): List<Country> = fakeListOfCountries
 
-    override suspend fun isInRecipeList(country: String): Boolean {
-        TODO("Not yet implemented")
-    }
+    override suspend fun isInRecipeList(country: String): Boolean = true
+
+    override suspend fun getCountryByCode(country: String): Country = mockedCountry
 
     override suspend fun categoryListIsEmpty(): Boolean {
         TODO("Not yet implemented")
@@ -103,9 +99,9 @@ class FakeRemoteDataSource : RemoteDataSourceTest {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getByID(mealID: String): Either<String, List<Recipe>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getByID(mealID: String): Either<String, List<Recipe>> =
+        Either.Right(fakeListOfRecipes)
+
 
     override suspend fun getRandomMeal(): Either<String, List<Recipe>> {
         return Either.Right(fakeListOfRecipes)
@@ -115,9 +111,7 @@ class FakeRemoteDataSource : RemoteDataSourceTest {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getListOfAreas(): Either<String, List<String>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getListOfAreas(): Either<String, List<String>> = Either.Right(mutableListOf("Spanish"))
 
     override suspend fun getListOfIngredients(): Either<String, List<Ingredient>> {
         TODO("Not yet implemented")
@@ -127,27 +121,33 @@ class FakeRemoteDataSource : RemoteDataSourceTest {
         TODO("Not yet implemented")
     }
 
-    override suspend fun filterByCategory(category: String): Either<String, List<Recipe>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun filterByCategory(category: String): Either<String, List<Recipe>> =
+        if (category == "Seafood") {
+            Either.Right(fakeListOfRecipes)
+        } else {
+            Either.Left("Connection failure")
+        }
 
-    override suspend fun filterByArea(area: String): Either<String, List<Recipe>> {
-        TODO("Not yet implemented")
-    }
+
+    override suspend fun filterByArea(area: String): Either<String, List<Recipe>> =
+        if (area == "Spain") {
+            Either.Right(fakeListOfRecipes)
+        } else {
+            Either.Left("Connection failure")
+        }
 }
 
 class FakeCountryDataSource : CountriesDataSourceTest {
-    override suspend fun getAllCountries(): Either<String, List<Country>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAllCountries(): Either<String, List<Country>> = Either.Right(
+        fakeListOfCountries)
 
-    override suspend fun getLocation(): String? {
-        TODO("Not yet implemented")
-    }
+
+    override suspend fun getLocation(): String = "ES"
 }
 
 class FakePermissionChecker : PermissionCheckTest {
-    override suspend fun request(permission: List<PermissionCheck.Permission>): Pair<Boolean, Boolean> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun request(permission: List<PermissionCheck.Permission>): Pair<Boolean, Boolean> = Pair(
+        first = true,
+        second = true
+    )
 }
