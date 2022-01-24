@@ -52,13 +52,14 @@
                 android:src="@drawable/ic_mapamundi" />
 
             <TextView
+                android:id="@+id/title_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:text="@string/countries"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:text="@string/countries" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
