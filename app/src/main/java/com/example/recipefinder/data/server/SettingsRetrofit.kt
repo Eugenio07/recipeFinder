@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-private val okHttpClient1 = OkHttpClient.Builder()
+val okHttpClient1: OkHttpClient = OkHttpClient.Builder()
     .connectTimeout(1, TimeUnit.MINUTES)
     .readTimeout(30, TimeUnit.SECONDS)
     .writeTimeout(15, TimeUnit.SECONDS)

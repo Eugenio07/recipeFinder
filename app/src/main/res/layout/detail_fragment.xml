@@ -49,6 +49,8 @@
                     android:layout_height="?attr/actionBarSize"
                     app:contentInsetStartWithNavigation="0dp"
                     app:layout_collapseMode="pin"
+                    app:title="recipe"
+                    android:text="recipe2"
                     app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
 
@@ -72,6 +74,7 @@
                 android:padding="@dimen/spacing_large">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_ingredient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"

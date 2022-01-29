@@ -31,7 +31,7 @@ class ListFragment : Fragment() {
 
         val recipeList = ListFragmentArgs.fromBundle(requireArguments()).listOfRecipes
 
-        binding.rvSecondary.adapter = RecipeAdapter(recipeList, RecipeListener {
+        binding.rvRecipes.adapter = RecipeAdapter(recipeList, RecipeListener {
             mViewModel.recipeClicked(it)
         })
 
