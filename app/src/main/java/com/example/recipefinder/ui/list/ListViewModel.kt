@@ -10,7 +10,6 @@ import com.example.domain.Recipe
 import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.use.RecipeUseCases
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -35,12 +34,10 @@ class ListViewModel @Inject constructor(
     }
 
     fun recipeClicked(recipe: Recipe) {
-        Logger.i("click")
         _model.value = Event(ListModel.Network(NETWORK_STATUS.LOADING))
         launch {
             when (val response = recipeUseCases.getByID(recipe.idMeal!!)) {
                 is Either.Left -> {
-                    Logger.d("error en la API: ${response.l}")
                     _model.value = Event(ListModel.Network(NETWORK_STATUS.ERROR))
                 }
                 is Either.Right -> {

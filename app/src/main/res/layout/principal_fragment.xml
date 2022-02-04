@@ -37,12 +37,19 @@
             android:layout_margin="16dp"
             android:layout_marginHorizontal="16dp"
             android:backgroundTint="@color/grey_3"
+            android:drawableTint="@color/grey_3"
+            android:foregroundTint="@color/grey_3"
             android:hint="@string/search_recipe_by_name"
             android:imeOptions="actionSearch"
+            android:outlineAmbientShadowColor="@color/grey_3"
+            android:outlineSpotShadowColor="@color/grey_3"
             android:padding="@dimen/spacing_xmedium"
+            android:shadowColor="@color/grey_3"
             android:singleLine="true"
             android:textColor="@color/grey_3"
+            android:textColorHighlight="@color/grey_3"
             android:textColorHint="@color/grey_3"
+            android:textColorLink="@color/grey_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/principal_title" />
@@ -200,39 +207,19 @@
         </LinearLayout>
 
 
-        <!--        <TextView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:text="principal" />-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/button"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="30dp"-->
-        <!--            android:onClick="@{()->viewModel.filterClicked()}"-->
-        <!--            android:text="to secondary"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-
-        <!--        <Button-->
-        <!--            android:id="@+id/button2"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="30dp"-->
-        <!--            android:onClick="@{()->viewModel.randomClicked()}"-->
-        <!--            android:text="to detail"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/button"-->
-        <!--            tools:layout_editor_absoluteX="0dp" />-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/button3"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="30dp"-->
-        <!--            android:onClick="@{()->viewModel.recipeNameSearched()}"-->
-        <!--            android:text="to list"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/button2" />-->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="@color/secondaryDarkColor"
+            app:indicatorSize="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

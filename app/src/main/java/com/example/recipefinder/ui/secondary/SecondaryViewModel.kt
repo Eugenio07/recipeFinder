@@ -10,7 +10,6 @@ import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.use.CountryUseCases
 import com.example.use.RecipeUseCases
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -43,20 +42,15 @@ class SecondaryViewModel @Inject constructor(
 
     fun getListOfFilters(filterType: String) {
         _model.value = Event(SecondaryModel.Network(NETWORK_STATUS.LOADING))
-        //   val handler = Handler()
-        //  handler.postDelayed(
-        //{
         launch {
             when (filterType) {
                 "Countries" -> {
                     when (val response = recipeUseCases.getListOfAreas()) {
                         is Either.Left -> {
-                            Logger.d("error en la API: ${response.l}")
                             _model.value =
                                 Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
                         }
                         is Either.Right -> {
-                            Logger.d("getListOfAreas: ${response.r}")
                             val location = countryUseCases.getLocation()
                             country =
                                 if (location != "Unknown") countryUseCases.getCountryByCode(
@@ -73,13 +67,10 @@ class SecondaryViewModel @Inject constructor(
                 "Ingredients" -> {
                     when (val response = recipeUseCases.getListOfIngredients()) {
                         is Either.Left -> {
-                            Logger.d("error en la API: ${response.l}")
                             _model.value =
                                 Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
                         }
                         is Either.Right -> {
-                            Logger.d("getListOfIngredients prueba nombre: ${response.r[0].strIngredient}")
-                            Logger.d("id: ${response.r[0].idIngredient}")
                             _model.value =
                                 Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
                             _model.value = Event(SecondaryModel.IngredientList(response.r))
@@ -89,13 +80,10 @@ class SecondaryViewModel @Inject constructor(
                 "Categories" -> {
                     when (val response = recipeUseCases.getListOfCategories()) {
                         is Either.Left -> {
-                            Logger.d("error en la API: ${response.l}")
                             _model.value =
                                 Event(SecondaryModel.Network(NETWORK_STATUS.ERROR))
                         }
                         is Either.Right -> {
-                            Logger.d("getCategories prueba nombre: ${response.r[0].strCategory}")
-                            Logger.d("id: ${response.r[0].idCategory}")
                             _model.value =
                                 Event(SecondaryModel.Network(NETWORK_STATUS.DONE))
                             _model.value = Event(SecondaryModel.CategoryList(response.r))
@@ -104,9 +92,6 @@ class SecondaryViewModel @Inject constructor(
                 }
             }
         }
-/* },
- 500
-)*/
     }
 
     fun myCountryRecipes() {
@@ -118,10 +103,8 @@ class SecondaryViewModel @Inject constructor(
         launch {
             when (val response = recipeUseCases.filterByArea(country)) {
                 is Either.Left -> {
-                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Logger.d("filterByAreas prueba nombre: ${response.r[0]}")
                     _model.value = Event(SecondaryModel.FilteredRecipeList(response.r))
                 }
             }
@@ -133,10 +116,8 @@ class SecondaryViewModel @Inject constructor(
         launch {
             when (val response = recipeUseCases.filterByIngredient(ingredient)) {
                 is Either.Left -> {
-                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Logger.d("filterByIngredient prueba nombre: ${response.r[0]}")
                     _model.value = Event(SecondaryModel.FilteredRecipeList(response.r))
                 }
             }
@@ -148,10 +129,8 @@ class SecondaryViewModel @Inject constructor(
         launch {
             when (val response = recipeUseCases.filterByCategory(category)) {
                 is Either.Left -> {
-                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Logger.d("filterByCategory prueba nombre: ${response.r[0]}")
                     _model.value = Event(SecondaryModel.FilteredRecipeList(response.r))
                 }
             }
