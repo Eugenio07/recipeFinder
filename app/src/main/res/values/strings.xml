@@ -7,4 +7,5 @@
     <string name="countries">Countries</string>
     <string name="search_recipe_by_name">Search recipe by name</string>
     <string name="find_my_country_recipes">Look for %s recipes</string>
+    <string name="principal_title">Find your favorite recipe</string>
 </resources>
