@@ -4,7 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.domain.Event
 import com.example.recipefinder.R
 import com.example.recipefinder.RecipeList
+import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.recipefinder.data.toRecipeApp
 import com.example.recipefinder.databinding.PrincipalFragmentBinding
 import com.example.recipefinder.ui.principal.PrincipalViewModel.*
@@ -73,6 +77,21 @@ class PrincipalFragment : Fragment() {
                         model.filter
                     )
                 )
+                is Network -> {
+                    when (model.networkStatus) {
+                        NETWORK_STATUS.DONE, NETWORK_STATUS.ERROR -> {
+                            binding.progressCircular.visibility = GONE
+                        }
+                        NETWORK_STATUS.LOADING -> {
+                            binding.progressCircular.visibility = VISIBLE
+                        }
+                    }
+                }
+                ShowError -> Toast.makeText(
+                    context, "The search has returned no results, try beef or honey.",
+                    Toast.LENGTH_LONG
+                ).show()
+
             }
         }
     }

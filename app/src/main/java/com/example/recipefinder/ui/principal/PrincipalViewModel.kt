@@ -6,6 +6,9 @@ import com.example.domain.Either
 import com.example.domain.Event
 import com.example.domain.Recipe
 import com.example.recipefinder.ScopedViewModel
+import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
+import com.example.recipefinder.ui.list.ListViewModel
+import com.example.recipefinder.ui.principal.PrincipalViewModel.PrincipalModel.*
 import com.example.use.RecipeUseCases
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,12 +32,15 @@ class PrincipalViewModel @Inject constructor(
 
     sealed class PrincipalModel {
         data class GoToSecondary(val filter: String) : PrincipalModel()
+        object ShowError : PrincipalModel()
         data class GoToList(val listOfRecipes: List<Recipe>) : PrincipalModel()
         data class GoToDetail(val recipe: Recipe) : PrincipalModel()
+        data class Network(val networkStatus: NETWORK_STATUS) : PrincipalModel()
     }
 
     fun randomClicked() {
         Logger.i("random")
+        _model.value = Event(Network(NETWORK_STATUS.LOADING))
         launch {
             when (val response = recipeUseCases.getRandomMeal()) {
                 is Either.Left -> {
@@ -49,14 +55,17 @@ class PrincipalViewModel @Inject constructor(
     }
 
     fun searchedByName(name: String) {
+        _model.value = Event(Network(NETWORK_STATUS.LOADING))
         launch {
             when (val response = recipeUseCases.getByName(name)) {
                 is Either.Left -> {
+                    _model.value = Event(Network(NETWORK_STATUS.DONE))
+                    _model.value = Event(ShowError)
                     Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
                     Logger.d("getByName prueba nombre: ${response.r[0]}")
-                    _model.value = Event(PrincipalModel.GoToList(response.r))
+                    _model.value = Event(GoToList(response.r))
                 }
             }
         }
@@ -64,12 +73,12 @@ class PrincipalViewModel @Inject constructor(
 
     fun filterClicked(filter: String) {
         Logger.i("filter: $filter")
-        _model.value = Event(PrincipalModel.GoToSecondary(filter))
+         _model.value = Event(GoToSecondary(filter))
     }
 
     fun favoriteClicked() {
         launch {
-            _model.value = Event(PrincipalModel.GoToList(recipeUseCases.getFavoritesRecipes()))
+            _model.value = Event(GoToList(recipeUseCases.getFavoritesRecipes()))
         }
     }
 }

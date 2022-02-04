@@ -15,6 +15,8 @@ import com.example.recipefinder.databinding.ListFragmentBinding
 import androidx.lifecycle.Observer
 import com.example.domain.Event
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
+import com.example.recipefinder.ui.list.ListViewModel.ListModel.GoToDetail
+import com.example.recipefinder.ui.list.ListViewModel.ListModel.Network
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,7 +46,7 @@ class ListFragment : Fragment() {
         event.getContentIfNotHandled()?.let { model ->
             Logger.d("model: $model")
             when (model) {
-                is ListViewModel.ListModel.GoToDetail -> {
+                is GoToDetail -> {
                     this.findNavController()
                         .navigate(
                             ListFragmentDirections.actionListFragmentToDetailFragment(
@@ -52,7 +54,7 @@ class ListFragment : Fragment() {
                             )
                         )
                 }
-                is ListViewModel.ListModel.Network -> {
+                is Network -> {
                     when(model.networkStatus){
                         NETWORK_STATUS.DONE, NETWORK_STATUS.ERROR -> {
                             binding.progressCircular.visibility = View.GONE
