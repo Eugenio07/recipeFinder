@@ -13,35 +13,50 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
         android:background="@color/secondaryColor"
         tools:context=".ui.principal.PrincipalFragment">
 
+        <TextView
+            android:id="@+id/principal_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="@string/principal_title"
+            android:textColor="@color/grey_3"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:backgroundTint="@color/grey_3"
             android:hint="@string/search_recipe_by_name"
             android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:background="@color/primaryColor"
             android:padding="@dimen/spacing_xmedium"
+            android:singleLine="true"
+            android:textColor="@color/grey_3"
+            android:textColorHint="@color/grey_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/principal_title" />
 
         <LinearLayout
             android:id="@+id/area_option"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/primaryColor"
+            android:elevation="8dp"
+            android:onClick="@{()->viewModel.filterClicked(@string/countries)}"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.filterClicked(@string/countries)}"
-            app:layout_constraintEnd_toStartOf="@id/ingredient_option"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_search">
 
@@ -52,27 +67,28 @@
                 android:src="@drawable/ic_mapamundi" />
 
             <TextView
+                android:id="@+id/title_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:text="@string/countries"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:text="@string/countries" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ingredient_option"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/primaryColor"
+            android:elevation="8dp"
+            android:onClick="@{()->viewModel.filterClicked(@string/ingredient)}"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.filterClicked(@string/ingredient)}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/area_option"
             app:layout_constraintTop_toBottomOf="@id/et_search">
 
             <ImageView
@@ -86,22 +102,22 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:text="@string/ingredient"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:text="@string/ingredient" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/category_option"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/primaryColor"
+            android:elevation="8dp"
+            android:onClick="@{()->viewModel.filterClicked(@string/category)}"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.filterClicked(@string/category)}"
-            app:layout_constraintEnd_toStartOf="@id/random_option"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/area_option">
 
@@ -116,23 +132,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:text="@string/category"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:text="@string/category" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/random_option"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/primaryColor"
+            android:elevation="8dp"
+            android:onClick="@{()->viewModel.randomClicked()}"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.randomClicked()}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/category_option"
             app:layout_constraintTop_toBottomOf="@id/ingredient_option">
 
             <ImageView
@@ -146,21 +162,22 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:text="@string/random_recipe"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:text="@string/random_recipe" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/favorite_option"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@color/primaryColor"
+            android:elevation="8dp"
+            android:onClick="@{()->viewModel.favoriteClicked()}"
             android:orientation="vertical"
             android:padding="16dp"
-            android:onClick="@{()->viewModel.favoriteClicked()}"
             app:layout_constraintStart_toStartOf="@id/category_option"
             app:layout_constraintTop_toBottomOf="@id/category_option">
 
@@ -168,6 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:foregroundGravity="center"
                 android:src="@drawable/ic_favorite" />
 
             <TextView
@@ -175,9 +193,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:text="@string/favorites"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:text="@string/favorites" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 

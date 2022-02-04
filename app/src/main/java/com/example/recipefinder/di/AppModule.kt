@@ -8,23 +8,20 @@ import com.example.data.source.RemoteDataSource
 import com.example.recipefinder.PermissionChecker
 import com.example.recipefinder.data.database.db.RecipeDataBase
 import com.example.recipefinder.data.database.db.RoomDataSource
+import com.example.recipefinder.data.server.okHttpClient1
 import com.example.recipefinder.data.server.restCountries.RestCountryDataSource
 import com.example.recipefinder.data.server.theMealDB.TheMealDBDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import javax.inject.Named
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {
-    @Provides
-    @Singleton
-    fun provideSomeString(): String{
-        return "Hola eugenio"
-    }
 
     @Provides
     @Singleton
@@ -41,4 +38,8 @@ object AppModule {
 
     @Provides
     fun permissionCheckerProvider(app: Application): PermissionCheck = PermissionChecker(app)
+
+    @Provides
+    @Singleton
+    fun okHTTPClientProvider(): OkHttpClient = okHttpClient1
 }
