@@ -7,10 +7,8 @@ import com.example.domain.Event
 import com.example.domain.Recipe
 import com.example.recipefinder.ScopedViewModel
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
-import com.example.recipefinder.ui.list.ListViewModel
 import com.example.recipefinder.ui.principal.PrincipalViewModel.PrincipalModel.*
 import com.example.use.RecipeUseCases
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -39,15 +37,15 @@ class PrincipalViewModel @Inject constructor(
     }
 
     fun randomClicked() {
-        Logger.i("random")
         _model.value = Event(Network(NETWORK_STATUS.LOADING))
         launch {
             when (val response = recipeUseCases.getRandomMeal()) {
                 is Either.Left -> {
-                    Logger.d("error en la API: ${response.l}")
+                    _model.value = Event(Network(NETWORK_STATUS.DONE))
+                    _model.value = Event(ShowError)
                 }
                 is Either.Right -> {
-                    Logger.d("getRandom prueba nombre: ${response.r[0]}")
+                    _model.value = Event(Network(NETWORK_STATUS.DONE))
                     _model.value = Event(PrincipalModel.GoToDetail(response.r[0]))
                 }
             }
@@ -61,10 +59,9 @@ class PrincipalViewModel @Inject constructor(
                 is Either.Left -> {
                     _model.value = Event(Network(NETWORK_STATUS.DONE))
                     _model.value = Event(ShowError)
-                    Logger.d("error en la API: ${response.l}")
                 }
                 is Either.Right -> {
-                    Logger.d("getByName prueba nombre: ${response.r[0]}")
+                    _model.value = Event(Network(NETWORK_STATUS.DONE))
                     _model.value = Event(GoToList(response.r))
                 }
             }
@@ -72,8 +69,7 @@ class PrincipalViewModel @Inject constructor(
     }
 
     fun filterClicked(filter: String) {
-        Logger.i("filter: $filter")
-         _model.value = Event(GoToSecondary(filter))
+        _model.value = Event(GoToSecondary(filter))
     }
 
     fun favoriteClicked() {

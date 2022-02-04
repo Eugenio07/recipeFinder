@@ -18,7 +18,6 @@ import com.example.recipefinder.RecipeList
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.recipefinder.ui.secondary.SecondaryViewModel.SecondaryModel
 import com.example.recipefinder.ui.secondary.SecondaryViewModel.SecondaryModel.*
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,7 +49,6 @@ class SecondaryFragment : Fragment() {
         event.getContentIfNotHandled()?.let { model ->
             when (model) {
                 is AreaList -> {
-                    Logger.d("Countries: ${model.countries}")
                     binding.textView.text = getString(R.string.countries)
                     binding.btnMyCountry.text =
                         getString(R.string.find_my_country_recipes, model.country.demonym)
@@ -72,7 +70,6 @@ class SecondaryFragment : Fragment() {
                         })
                 }
                 is CategoryList -> {
-                    Logger.d("Categories: ${model.categories}")
                     binding.textView.text = getString(R.string.category)
                     binding.rvSecondary.adapter = CategoriesAdapter(model.categories,
                         CategoryListener {

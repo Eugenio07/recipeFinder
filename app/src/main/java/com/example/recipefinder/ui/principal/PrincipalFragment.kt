@@ -38,9 +38,7 @@ class PrincipalFragment : Fragment() {
         mViewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
 
         binding.etSearch.setOnEditorActionListener { textView, i, _ ->
-            Logger.d("text = ${textView.text}")
             if (i == EditorInfo.IME_ACTION_SEARCH) {
-                Logger.d("entro")
                 mViewModel.searchedByName(textView.text.toString())
                 true
             } else false
@@ -51,7 +49,6 @@ class PrincipalFragment : Fragment() {
 
     private fun changedUI(event: Event<PrincipalModel>) {
         event.getContentIfNotHandled()?.let { model ->
-            Logger.d("model: $model")
             when (model) {
                 is GoToDetail -> {
                     this.findNavController()

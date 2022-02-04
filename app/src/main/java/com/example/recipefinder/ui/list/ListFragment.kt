@@ -17,7 +17,6 @@ import com.example.domain.Event
 import com.example.recipefinder.data.server.theMealDB.NETWORK_STATUS
 import com.example.recipefinder.ui.list.ListViewModel.ListModel.GoToDetail
 import com.example.recipefinder.ui.list.ListViewModel.ListModel.Network
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,7 +43,6 @@ class ListFragment : Fragment() {
 
     private fun changedUI(event: Event<ListViewModel.ListModel>) {
         event.getContentIfNotHandled()?.let { model ->
-            Logger.d("model: $model")
             when (model) {
                 is GoToDetail -> {
                     this.findNavController()
